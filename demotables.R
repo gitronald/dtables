@@ -22,7 +22,7 @@ Dtable <- function(x, round = FALSE) {
 Dtable2 <- function (x, y, round = FALSE) {
   # Demographic Frequencies Table 
   #  Args: 
-  #    x: Object$FactorVariableName
+  #    x: Object
   #    y: Character vector
   #
   #First column - Name the demographic from object name
