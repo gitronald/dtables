@@ -1,2 +1,2 @@
 # demotables
-Demographic tables for R
+Demographic frequencies and descriptive statistics table functions for R
