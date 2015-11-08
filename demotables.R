@@ -65,13 +65,17 @@ dfactor <- function (x, y, neat = FALSE) {
     # Add percent symbol: "$" is end of string in regex
     dgroup[, "Perc"] <- gsub("$", "%", dgroup[, "Perc"])
     
-    #Remove repetitive labels
-    Demographic <- c(DemoName, rep("", (length(table(x[y]))-1)))
+    # If only one variable, remove repetitive demographic IDs (presentation format)
+    if (length(y) == 1) {
+      Demographic <- c(DemoName, rep("", (length(table(x[y]))-1)))
+    }
   }
   
   # Attach data name and clean up names
+  if (length(y) == 1) {
+    names(dgroup)[1] <- "Group"
+  }
   dgroup <- cbind(Demographic, dgroup)
-  names(dgroup)[2] <- "Group"
   rownames(dgroup) <- NULL
   
   return(dgroup)
