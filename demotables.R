@@ -1,5 +1,5 @@
 
-detectClass <- function(dvariable, data){
+detectClass <- function(data, dvariable){
     # Helper function used in dtable  
 detect <- cbind(dvariable = dvariable, dclass = NA)
 for (i in 1:length(dvariable)){
@@ -31,6 +31,7 @@ dtable <- function (x, y, round = F, neat = F){
       data <- rep(paste0(deparse(substitute(x))), nrow(dtable[["factor"]]))
     }
     dtable[["factor"]] <- cbind(data, dtable[["factor"]]) 
+    row.names(dtable[["factor"]]) <- NULL
   } 
   if(length(detected$n) > 0) {
     dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$n, dnumeric, x = x, round = round))
@@ -40,7 +41,8 @@ dtable <- function (x, y, round = F, neat = F){
     } else {
       data <- rep(paste0(deparse(substitute(x))), nrow(dtable[["numeric"]]))
     }
-    dtable[["numeric"]] <- cbind(data, dtable[["numeric"]]) 
+    dtable[["numeric"]] <- cbind(data, dtable[["numeric"]])
+    row.names(dtable[["numeric"]]) <- NULL
   }
 
   return(dtable)
