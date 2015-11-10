@@ -1,3 +1,11 @@
+
+setwd("C:/Users/aibrt/Desktop/Rprojects/dtables")
+mydata <- read.table("demoData.txt", sep = ",", header = T)
+
+# Histograms
+ggplot(x, aes(x = Gender, y = Freq)) + geom_bar(stat = "identity")
+ggplot(x, aes(x = Gender, y = Freq)) + geom_bar(stat = "identity") + facet_grid(~ GroupNumber)
+
 dtable <- function (x, y, type = c("factor", "numeric"), round = F, neat = F){
   # Demographic Frequency Tables
   #  Args: 
@@ -14,7 +22,7 @@ dtable <- function (x, y, type = c("factor", "numeric"), round = F, neat = F){
   # If type = factor, use dfactor function to produce frequencies table
   # Else if type = numeric, produce descriptive stats table
   if(type == "factor") {
-    dtable <- do.call(rbind.data.frame, lapply(y, dfactor, x = x, round = round, neat = neat))
+    dtable <- do.call(rbind.data.frame, lapply(y, dfactor, x = x, neat = neat))
   } else if(type == "numeric") {
     dtable <- do.call(rbind.data.frame, lapply(y, dnumeric, x = x, round = round))
     dtable <- dtable[, -1]
@@ -23,11 +31,6 @@ dtable <- function (x, y, type = c("factor", "numeric"), round = F, neat = F){
   # If neat = T, convert frequencies table to publication ready (round and format)
   if(neat) {
     data <- c(paste0(deparse(substitute(x))), rep("", nrow(dtable) - 1))
-    
-    if(type == "factor") {
-      dtable[length(dtable)] <- gsub("$", "%", dtable[[length(dtable)]])
-    }
-    
   } else {
     data <- rep(paste0(deparse(substitute(x))), nrow(dtable))
   }
@@ -37,7 +40,7 @@ dtable <- function (x, y, type = c("factor", "numeric"), round = F, neat = F){
 }
 
 
-dfactor <- function (x, y, neat = FALSE) {
+dfactor <- function (x, y, neat = FALSE, sizesort = FALSE) {
   # Demographic Frequencies Table (Factors)
   #  Args: 
   #    x: Data Object
@@ -71,10 +74,18 @@ dfactor <- function (x, y, neat = FALSE) {
     }
   }
   
-  # Attach data name and clean up names
+  # Rename demographic group variable and demographic ID if more than 1 used
   if (length(y) == 1) {
     names(dgroup)[1] <- "Group"
+  } else {
+    Demographic <- paste(y, collapse = ".")
   }
+  
+  # Sort by Freq
+  if (sizesort) {
+    dgroup <- dgroup[order(dgroup[, "Freq"], decreasing = TRUE), ]
+  }
+  
   dgroup <- cbind(Demographic, dgroup)
   rownames(dgroup) <- NULL
   
