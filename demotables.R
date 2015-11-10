@@ -1,29 +1,30 @@
-# Subset method
-detect <- cbind(dvariable, dclass = NA)
-for (i in 1:length(z)){
-  detect[, "dclass"][i] <- (class(x[, z[i]]))
+
+detectClass <- function(dvariable, data){
+    # Helper function used in dtable  
+detect <- cbind(dvariable = dvariable, dclass = NA)
+for (i in 1:length(dvariable)){
+  detect[, "dclass"][i] <- class(data[, dvariable[i]])
+}
+detected <- list()
+detected[["factor"]] <- detect[detect[, "dclass"] == "factor", "dvariable"]
+detected[["numeric"]] <- detect[detect[, "dclass"] %in% c("numeric", "integer"), "dvariable"]
+
+return(detected)
 }
 
 dtable <- function (x, y, round = F, neat = F){
+  
   # Demographic Frequency Tables
   #  Args: 
   #    x: Object
   #    y: Variable Name
   #  Returns:
   #    dtable - List of Frequency table and numeric data.
-  
-  # Autodetect variable class
-  detect <- cbind(dvariable = y, dclass = NA)
-  for (i in 1:length(y)){
-    detect[, "dclass"][i] <- (class(mydata[, y[i]]))
-  }
-  detect.f <- detect[detect[, "dclass"] == "factor", "dvariable"]
-  detect.n <- detect[detect[, "dclass"] %in% c("numeric", "integer"), "dvariable"]
-  
+  detected <- detectClass(x, y)
   # Produce frequencies table and descriptive stats table (dependent on available data)
   dtable <- list()
-  if(length(detect.f) > 0) {
-    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detect.f, dfactor, x = x, neat = neat))
+  if(length(detected$f) > 0) {
+    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f, dfactor, x = x, neat = neat))
     if(neat) {
       data <- c(paste0(deparse(substitute(x))), rep("", nrow(dtable[["factor"]]) - 1))
     } else {
@@ -31,14 +32,15 @@ dtable <- function (x, y, round = F, neat = F){
     }
     dtable[["factor"]] <- cbind(data, dtable[["factor"]]) 
   } 
-  if(length(detect.n) > 0) {
-    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detect.n, dnumeric, x = x, round = round))
+  if(length(detected$n) > 0) {
+    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$n, dnumeric, x = x, round = round))
     dtable[["numeric"]] <- dtable[["numeric"]][, -1]
     if(neat) {
       data <- c(paste0(deparse(substitute(x))), rep("", nrow(dtable[["numeric"]]) - 1))
     } else {
       data <- rep(paste0(deparse(substitute(x))), nrow(dtable[["numeric"]]))
     }
+    dtable[["numeric"]] <- cbind(data, dtable[["numeric"]]) 
   }
 
   return(dtable)
