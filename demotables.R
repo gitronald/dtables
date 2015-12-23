@@ -1,19 +1,30 @@
 
-detectClass <- function(data, dvariable){
+#' detectClass
+#'
+#' Helper function for dtable. Obtains column classes and splits variable 
+#' names into a list of two vectors based on numeric/integer or factor class.
+#' 
+#' @param data data.frame
+#' @param vnames vector of variable names from data.frame to classify
+#'
+#' @return
+#' @export
+#'
+#' @examples
+detectClass <- function(data, vnames){
     # Helper function used in dtable  
-detect <- cbind(dvariable = dvariable, dclass = NA)
-for (i in 1:length(dvariable)){
-  detect[, "dclass"][i] <- class(data[, dvariable[i]])
+detect <- cbind(vnames = vnames, dclass = NA)
+for (i in 1:length(vnames)){
+  detect[, "dclass"][i] <- class(data[, vnames[i]])
 }
 detected <- list()
-detected[["factor"]] <- detect[detect[, "dclass"] == "factor", "dvariable"]
-detected[["numeric"]] <- detect[detect[, "dclass"] %in% c("numeric", "integer"), "dvariable"]
+detected[["factor"]] <- detect[detect[, "dclass"] == "factor", "vnames"]
+detected[["numeric"]] <- detect[detect[, "dclass"] %in% c("numeric", "integer"), "vnames"]
 
 return(detected)
 }
 
 dtable <- function (x, y, round = F, neat = F){
-  
   # Demographic Frequency Tables
   #  Args: 
   #    x: Object
