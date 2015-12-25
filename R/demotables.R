@@ -1,7 +1,6 @@
 # TODO:
 #  - Neatify numeric return on TRUE argument in dtable
 #  - Add sizesort argument to dtable
-
 #' detectClass
 #'
 #' Helper function for dtable. Obtains column classes and splits variable 
@@ -14,7 +13,6 @@
 #'    and a vector containing numeric variable names.
 #' @seealso \code{\link{class}} which this function relies on
 #' @export
-#'
 #' @examples
 #' data(demoData)
 #' detectClass(myData, "Education")
@@ -34,7 +32,6 @@ detected[["numeric"]] <- detect[detect[, "dclass"] %in% c("numeric", "integer"),
 
 return(detected)
 }
-
 #' dtable
 #'
 #' @param data data.frame
@@ -80,8 +77,6 @@ dtable <- function (data, vnames, round = F, neat = F){
 
   return(dtable)
 }
-
-
 #' dfactor
 #'
 #' @param data data.frame
@@ -143,8 +138,6 @@ dfactor <- function (data, vnames, neat = FALSE, sizesort = FALSE) {
   
   return(dgroup)
 }
-
-
 #' dnumeric
 #'
 #' @param data data.frame
