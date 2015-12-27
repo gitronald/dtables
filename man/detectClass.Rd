@@ -9,25 +9,25 @@ detectClass(data, vnames)
 \arguments{
 \item{data}{data.frame}
 
-\item{vnames}{vector of variable names from data.frame to classify}
+\item{vnames}{a vector of variable names from data.frame to classify}
 }
 \value{
-Returns a list with a vector containing factor variable names,
-   and a vector containing numeric variable names.
+Returns a list with a vector containing factor variable names, and a
+  vector containing numeric variable names.
 }
 \description{
-Helper function for dtable. Obtains column classes and splits variable
-names into a list of two vectors based on numeric/integer or factor class.
+Helper function for \code{\link{dtable}}. Obtains column classes and splits
+variable names into a list of two vectors based on numeric/integer or factor
+class.
 }
 \examples{
-data(demoData)
-detectClass(myData, "Education")
+# All variables
+detectClass(iris2, names(iris2))
 
-vars <- c("Education", "Age")
-detectClass(myData, vars)
-
+# Single variable
+detectClass(iris2, "Species")
 }
 \seealso{
-\code{\link{class}} which this function relies on
+\code{\link{class}} to examine method for extracting class type.
 }
 

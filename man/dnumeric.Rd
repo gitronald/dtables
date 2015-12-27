@@ -4,20 +4,35 @@
 \alias{dnumeric}
 \title{dnumeric}
 \usage{
-dnumeric(data, vnames, round = FALSE)
+dnumeric(data, vnames, neat = FALSE)
 }
 \arguments{
-\item{data}{data.frame}
+\item{data}{a \code{data.frame}}
 
-\item{vnames}{single variable name to examine with \code{psych::describe}}
+\item{vnames}{a single variable name to examine with \code{psych::describe}}
 
-\item{round}{logical, returns rounded values if \code{TRUE}}
+\item{neat}{logical, returns rounded values if \code{TRUE}}
 }
 \value{
-data.frame
+Returns a \code{data.frame} with common descriptive statistics for a
+  numeric variable, as defined in \code{psych::describe}, concatenated with
+  the name of the dataset and the name of the variable.
 }
 \description{
-This function converts a numeric column from a data.frame into a descriptive statistics
-table using \code{psych::describe}.
+Wrapper for \code{psych::describe} that adds the name of the dataset and the
+variable being examined to its output. Use in \code{dtable} for multiple
+variables.
+}
+\examples{
+# Single variable
+dnumeric(iris2, "Sepal.Length")
+
+# Use dtable for multiple variables
+}
+\seealso{
+See \code{\link{dtable}}
+
+See \code{\link[psych]{describe}} for details on the descriptives
+  returned
 }
 

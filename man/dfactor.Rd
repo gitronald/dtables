@@ -9,18 +9,27 @@ dfactor(data, vnames, neat = TRUE, sizesort = TRUE)
 \arguments{
 \item{data}{a \code{data.frame}}
 
-\item{vnames}{vector of variable names from \code{data.frame} to use in creation
-of demographics table, multiple names produces crosstabs.}
+\item{vnames}{a vector of variable names from \code{data.frame} to use in
+creation of demographics table, multiple variables produces more specific
+groups.}
 
-\item{neat}{logical, \code{TRUE} returns rounded factor table with percent symbols}
+\item{neat}{logical, \code{TRUE} returns rounded factor table with percent
+symbols}
 
 \item{sizesort}{logical, \code{TRUE} returns table sorted by size}
 }
 \value{
-data.frame
+Returns a demographic frequency table of varying specificity.
 }
 \description{
-This function converts a column(s) from a data.frame into a frequencies table
+This function converts a column(s) from a \code{data.frame} into a frequencies table
 formatted in standard presentation structure with percent symbols.
+}
+\examples{
+# Single demographic
+dfactor(iris2, "Species")
+
+# Two demographics
+dfactor(iris2, c("Color", "Species"))
 }
 
