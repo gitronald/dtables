@@ -1,11 +1,17 @@
 Package: demotables
 Title: Tools For Creating Basic Demographic Tables
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: person("Ronald", "Robertson", email = "rrobertson@aibrt.org", role = c("aut", "cre"))
-Description: A method that reduces the time and amount of code required to create basic demographic tables. The demotable function handles both factor variables, returning a table with the N and relative % reported for each factor, and numeric variables, returning a table with basic descriptive statistics such as mean median, sd, etc. for each variable. Basic descriptive stats in demotables depends on the psych package, and adds to it's output standard
-Depends: 
+Description: Functions that reduce the time and amount of code required to create basic
+    demographic frequencies tables. The dtable function handles both factor variables,
+    returning a table with the N and relative % reported for each factor, and numeric
+    variables, returning a table with basic descriptive statistics such as mean, median,
+    sd, etc. for each variable. Descriptive stats for numeric variables depends on the
+    describe function from the psych package.
+Depends:
     R (>= 3.2.2)
-License: 
+License: GPL-3 
 LazyData: true
-RoxygenNote: 5.0.0
-Imports: psych
+RoxygenNote: 5.0.1
+Imports:
+    psych
