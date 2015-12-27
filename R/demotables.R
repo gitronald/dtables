@@ -22,11 +22,13 @@
 #' detectClass(myData, vars)
 #'
 detectClass <- function(data, vnames){
-    # Helper function used in dtable
+
 detect <- cbind(vnames = vnames, dclass = NA)
+
 for (i in 1:length(vnames)){
   detect[, "dclass"][i] <- class(data[, vnames[i]])
 }
+
 detected <- list()
 detected[["factor"]] <- detect[detect[, "dclass"] == "factor", "vnames"]
 detected[["numeric"]] <- detect[detect[, "dclass"] %in% c("numeric", "integer"), "vnames"]
@@ -35,6 +37,8 @@ return(detected)
 }
 
 #' dtable
+#'
+#' Demographic frequency tables and descriptive statistics tables for R.
 #'
 #' @param data data.frame
 #' @param vnames vector of variable names from data.frame to use in creation
@@ -46,34 +50,29 @@ return(detected)
 #'    single data.frame returned if only one variable class in vnames.
 #'
 dtable <- function (data, vnames, round = F, neat = F){
-  # Demographic Frequency Tables
-  #  Args:
-  #    data: Object
-  #    vnames: Variable Name
-  #  Returns:
-  #    dtable - List of Frequency table and numeric data.
+
   detected <- detectClass(data, vnames)
   # Produce frequencies table and descriptive stats table (dependent on available data)
   dtable <- list()
   if(length(detected$f) > 0) {
     dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f, dfactor, data = data, neat = neat))
     if(neat) {
-      data <- c(paste0(deparse(substitute(data))), rep("", nrow(dtable[["factor"]]) - 1))
+      dataset <- c(paste0(deparse(substitute(data))), rep("", nrow(dtable[["factor"]]) - 1))
     } else {
-      data <- rep(paste0(deparse(substitute(data))), nrow(dtable[["factor"]]))
+      dataset <- rep(paste0(deparse(substitute(data))), nrow(dtable[["factor"]]))
     }
-    dtable[["factor"]] <- cbind(data, dtable[["factor"]])
+    dtable[["factor"]] <- cbind(dataset, dtable[["factor"]])
     row.names(dtable[["factor"]]) <- NULL
   }
   if(length(detected$n) > 0) {
     dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$n, dnumeric, data = data, round = round))
     dtable[["numeric"]] <- dtable[["numeric"]][, -1]
     if(neat) {
-      data <- c(paste0(deparse(substitute(data))), rep("", nrow(dtable[["numeric"]]) - 1))
+      dataset <- c(paste0(deparse(substitute(data))), rep("", nrow(dtable[["numeric"]]) - 1))
     } else {
-      data <- rep(paste0(deparse(substitute(data))), nrow(dtable[["numeric"]]))
+      dataset <- rep(paste0(deparse(substitute(data))), nrow(dtable[["numeric"]]))
     }
-    dtable[["numeric"]] <- cbind(data, dtable[["numeric"]])
+    dtable[["numeric"]] <- cbind(dataset, dtable[["numeric"]])
     row.names(dtable[["numeric"]]) <- NULL
   }
 
@@ -91,11 +90,6 @@ dtable <- function (data, vnames, round = F, neat = F){
 #' @return data.frame
 #'
 dfactor <- function (data, vnames, neat = FALSE, sizesort = FALSE) {
-  # Demographic Frequencies Table (Factors)
-  #  Args:
-  #    data: Data Object
-  #    vnames: Variable Name
-  #
   # First column - Name the demographic from object name
   Demographic <- vector()
   DemoName    <- paste0(vnames)
@@ -158,10 +152,10 @@ dnumeric <- function(data, vnames, round = FALSE) {
   #
 
   require(psych)
-  data     <- paste0(deparse(substitute(data)))
+  dataset  <- paste0(deparse(substitute(data)))
   variable <- paste0(vnames)
-  descript <- describe(data[[vnames]])
-  results  <- cbind(data, variable, descript)
+  descript <- describe(data[, vnames])
+  results  <- cbind(dataset, variable, descript)
 
   if (round) {
     results <- cbind(results[, 1:4], round(results[, 5:length(results)], digits = 1))
