@@ -4,7 +4,7 @@
 \alias{dtable}
 \title{dtable}
 \usage{
-dtable(data, vnames, round = F, neat = F)
+dtable(data, vnames, round = TRUE, neat = TRUE)
 }
 \arguments{
 \item{data}{data.frame}
@@ -12,15 +12,19 @@ dtable(data, vnames, round = F, neat = F)
 \item{vnames}{vector of variable names from data.frame to use in creation
 of demographic tables}
 
-\item{round}{logical, TRUE returns rounded numeric table}
+\item{round}{logical, \code{TRUE} returns rounded numeric table}
 
-\item{neat}{logical, TRUE returns rounded factor table with percent symbols}
+\item{neat}{logical, \code{TRUE} returns rounded factor table with percent symbols}
 }
 \value{
 list of data.frames $factor and $numeric if `vnames` contains both classes,
    single data.frame returned if only one variable class in vnames.
 }
 \description{
-dtable
+Demographic frequency tables and descriptive statistics tables for R.
+}
+\examples{
+dtable(iris, names(iris))
+
 }
 

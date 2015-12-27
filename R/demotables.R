@@ -1,6 +1,7 @@
 # TODO:
 #  - Neatify numeric return on TRUE argument in dtable
 #  - Add sizesort argument to dtable
+#  - Move examples into roxygen comments
 
 #' detectClass
 #'
@@ -43,13 +44,16 @@ return(detected)
 #' @param data data.frame
 #' @param vnames vector of variable names from data.frame to use in creation
 #'    of demographic tables
-#' @param round logical, TRUE returns rounded numeric table
-#' @param neat logical, TRUE returns rounded factor table with percent symbols
+#' @param round logical, \code{TRUE} returns rounded numeric table
+#' @param neat logical, \code{TRUE} returns rounded factor table with percent symbols
 #'
 #' @return list of data.frames $factor and $numeric if `vnames` contains both classes,
 #'    single data.frame returned if only one variable class in vnames.
 #'
-dtable <- function (data, vnames, round = F, neat = F){
+#' @examples
+#' dtable(iris, names(iris))
+#'
+dtable <- function (data, vnames, round = TRUE, neat = TRUE){
 
   detected <- detectClass(data, vnames)
   # Produce frequencies table and descriptive stats table (dependent on available data)
@@ -81,15 +85,19 @@ dtable <- function (data, vnames, round = F, neat = F){
 
 #' dfactor
 #'
-#' @param data data.frame
-#' @param vnames vector of variable names from data.frame to use in creation
-#'    of demographics table, multiple names examines crosstabs.
-#' @param neat logical, TRUE returns rounded factor table with percent symbols
-#' @param sizesort logical, TRUE returns table sorted by size
+#' This function converts a column(s) from a data.frame into a frequencies table
+#' formatted in standard presentation structure with percent symbols.
+#'
+#' @param data a \code{data.frame}
+#' @param vnames vector of variable names from \code{data.frame} to use in creation
+#'    of demographics table, multiple names produces crosstabs.
+#' @param neat logical, \code{TRUE} returns rounded factor table with percent symbols
+#' @param sizesort logical, \code{TRUE} returns table sorted by size
 #'
 #' @return data.frame
 #'
-dfactor <- function (data, vnames, neat = FALSE, sizesort = FALSE) {
+dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
+
   # First column - Name the demographic from object name
   Demographic <- vector()
   DemoName    <- paste0(vnames)
@@ -138,21 +146,19 @@ dfactor <- function (data, vnames, neat = FALSE, sizesort = FALSE) {
 
 #' dnumeric
 #'
+#' This function converts a numeric column from a data.frame into a descriptive statistics
+#' table using \code{psych::describe}.
+#'
 #' @param data data.frame
-#' @param vnames single variable name to describe
-#' @param round
+#' @param vnames single variable name to examine with \code{psych::describe}
+#' @param round logical, returns rounded values if \code{TRUE}
 #'
 #' @return data.frame
 #'
 dnumeric <- function(data, vnames, round = FALSE) {
-  # Demographic Frequencies Table (Numerics)
-  #  Args:
-  #    data: Object
-  #    vnames: Variable Name
-  #
 
-  require(psych)
-  dataset  <- paste0(deparse(substitute(data)))
+    require(psych)
+  dataset  <- deparse(substitute(data))
   variable <- paste0(vnames)
   descript <- describe(data[, vnames])
   results  <- cbind(dataset, variable, descript)

@@ -9,14 +9,15 @@ dnumeric(data, vnames, round = FALSE)
 \arguments{
 \item{data}{data.frame}
 
-\item{vnames}{single variable name to describe}
+\item{vnames}{single variable name to examine with \code{psych::describe}}
 
-\item{round}{}
+\item{round}{logical, returns rounded values if \code{TRUE}}
 }
 \value{
 data.frame
 }
 \description{
-dnumeric
+This function converts a numeric column from a data.frame into a descriptive statistics
+table using \code{psych::describe}.
 }
 

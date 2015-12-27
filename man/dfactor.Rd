@@ -4,22 +4,23 @@
 \alias{dfactor}
 \title{dfactor}
 \usage{
-dfactor(data, vnames, neat = FALSE, sizesort = FALSE)
+dfactor(data, vnames, neat = TRUE, sizesort = TRUE)
 }
 \arguments{
-\item{data}{data.frame}
+\item{data}{a \code{data.frame}}
 
-\item{vnames}{vector of variable names from data.frame to use in creation
-of demographics table, multiple names examines crosstabs.}
+\item{vnames}{vector of variable names from \code{data.frame} to use in creation
+of demographics table, multiple names produces crosstabs.}
 
-\item{neat}{logical, TRUE returns rounded factor table with percent symbols}
+\item{neat}{logical, \code{TRUE} returns rounded factor table with percent symbols}
 
-\item{sizesort}{logical, TRUE returns table sorted by size}
+\item{sizesort}{logical, \code{TRUE} returns table sorted by size}
 }
 \value{
 data.frame
 }
 \description{
-dfactor
+This function converts a column(s) from a data.frame into a frequencies table
+formatted in standard presentation structure with percent symbols.
 }
 

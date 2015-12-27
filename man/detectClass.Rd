@@ -12,11 +12,11 @@ detectClass(data, vnames)
 \item{vnames}{vector of variable names from data.frame to classify}
 }
 \value{
-Returns a list with a vector containing factor variable names, 
+Returns a list with a vector containing factor variable names,
    and a vector containing numeric variable names.
 }
 \description{
-Helper function for dtable. Obtains column classes and splits variable 
+Helper function for dtable. Obtains column classes and splits variable
 names into a list of two vectors based on numeric/integer or factor class.
 }
 \examples{
