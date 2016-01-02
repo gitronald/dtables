@@ -43,7 +43,7 @@ detectClass <- function(data, vnames){
 #'   demographic tables
 #' @param neat logical, \code{TRUE} returns rounded factor table with percent
 #'   symbols
-#' @return List of two \code{data.frame}s, split into factor and numeric variables if
+#' @return List of two \code{data.frames}, split into factor and numeric variables if
 #'   \code{vnames} contains both classes, single \code{data.frame} returned if only one
 #'   variable class detected in \code{vnames}.
 #' @importFrom psych describe
@@ -57,6 +57,10 @@ detectClass <- function(data, vnames){
 #'
 #' # Round all output and add percent symbols to factor output
 #' dtable(iris2, names(iris2), neat = TRUE)
+#'
+#' # Raw output
+#' dtable(iris2, names(iris2), neat = FALSE)
+#'
 dtable <- function (data, vnames, neat = TRUE){
 
   detected <- detectClass(data, vnames)
