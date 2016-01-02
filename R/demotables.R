@@ -1,4 +1,4 @@
-#' detectClass
+#' Detect Variable Classes
 #'
 #' Helper function for \code{\link{dtable}}. Obtains column classes and splits
 #' variable names into a list of two vectors based on numeric/integer or factor
@@ -12,6 +12,9 @@
 #' @seealso \code{\link{class}} to examine method for extracting class type.
 #' @export
 #' @examples
+#' # Load sample data
+#' \code{data(iris2)}
+#'
 #' # All variables
 #' \code{detectClass(iris2, names(iris2))}
 #'
@@ -30,7 +33,7 @@ detectClass <- function(data, vnames){
   return(detected)
 }
 
-#'Create demographic summary tables
+#'Create a demographics style summary of variables
 #'
 #'Create demographic frequency tables and descriptive statistics tables for R.
 #'
@@ -47,6 +50,9 @@ detectClass <- function(data, vnames){
 #'@importFrom psych describe
 #'@export
 #' @examples
+#' # Load sample data
+#' \code{data(iris2)}
+#'
 #' # Examine all variables
 #' \code{dtable(iris2, names(iris2))}
 #'
@@ -59,7 +65,7 @@ detectClass <- function(data, vnames){
 #' # Raw output
 #' \code{dtable(iris2, names(iris2), neat = FALSE)}
 #'
-dtable <- function (data, vnames, neat = TRUE){
+dtable <- function (data, vnames, neat = TRUE, sizesort = TRUE){
 
   detected <- detectClass(data, vnames)
   dtable <- list()
@@ -98,7 +104,7 @@ dtable <- function (data, vnames, neat = TRUE){
   return(dtable)
 }
 
-#' dfactor
+#' Demographic Factor Frequencies Tables
 #'
 #' This function converts a column(s) from a \code{data.frame} into a
 #' frequencies table formatted in standard presentation structure with percent
@@ -115,6 +121,9 @@ dtable <- function (data, vnames, neat = TRUE){
 #' @seealso \link{\code{table}} which this function utilizes.
 #' @export
 #' @examples
+#' # Load sample data
+#' \code{data(iris2)}
+#'
 #' # Single demographic
 #' \code{dfactor(iris2, "Species")}
 #'
@@ -168,7 +177,7 @@ dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
   return(dgroup)
 }
 
-#' dnumeric
+#' Create standard descriptive statistics
 #'
 #' Wrapper for \code{psych::describe} that adds the name of the dataset and the
 #' variable being examined to its output. Use in \code{dtable} for multiple
@@ -177,9 +186,10 @@ dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
 #' @param data a \code{data.frame}
 #' @param vnames a single variable name to examine with \code{psych::describe}
 #' @param neat logical, returns rounded values if \code{TRUE}
+#' @param sizesort logical, returns sorted data by mean if \code{TRUE}
 #' @seealso See \code{\link{dtable}}
-#' @seealso See \code{\link[psych]{describe}} for details on the descriptives
-#'   returned
+#' @seealso See \code{\link[psych]{describe}} for more details on the
+#'   descriptive statistics returned
 #' @return Returns a \code{data.frame} with common descriptive statistics for a
 #'   numeric variable, as defined in \code{psych::describe}, concatenated with
 #'   the name of the dataset and the name of the variable.
@@ -189,7 +199,7 @@ dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
 #' # Single variable
 #' \code{dnumeric(iris2, "Sepal.Length")}
 #'
-#' # Use dtable for multiple variables
+#' # Use \link{\code{dtable}} for multiple variables
 dnumeric <- function(data, vnames, neat = FALSE, sizesort = FALSE) {
   dataset  <- deparse(substitute(data))
   variable <- paste0(vnames)
