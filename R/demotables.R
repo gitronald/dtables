@@ -1,7 +1,3 @@
-# TODO:
-#  - Add sizesort argument to dtable
-#  - Move examples into roxygen comments
-
 #' detectClass
 #'
 #' Helper function for \code{\link{dtable}}. Obtains column classes and splits
@@ -17,10 +13,10 @@
 #' @export
 #' @examples
 #' # All variables
-#' detectClass(iris2, names(iris2))
+#' \code{detectClass(iris2, names(iris2))}
 #'
 #' # Single variable
-#' detectClass(iris2, "Species")
+#' \code{detectClass(iris2, "Species")}
 detectClass <- function(data, vnames){
   detect <- cbind(vnames = vnames, dclass = NA)
   for (i in 1:length(vnames)){
@@ -34,32 +30,34 @@ detectClass <- function(data, vnames){
   return(detected)
 }
 
-#'dtable
+#'Create demographic summary tables
 #'
-#'Demographic frequency tables and descriptive statistics tables for R.
+#'Create demographic frequency tables and descriptive statistics tables for R.
 #'
-#' @param data data.frame
-#' @param vnames a vector of variable names from \code{data.frame} to use in creation of
-#'   demographic tables
-#' @param neat logical, \code{TRUE} returns rounded factor table with percent
-#'   symbols
-#' @return List of two \code{data.frames}, split into factor and numeric variables if
-#'   \code{vnames} contains both classes, single \code{data.frame} returned if only one
-#'   variable class detected in \code{vnames}.
-#' @importFrom psych describe
-#' @export
+#'@param data a \code{data.frame}
+#'@param vnames all, or a subset \code{vector} of variable names from
+#'  \code{data.frame}
+#'@param neat logical, defaults to \code{TRUE} and returns rounded factor table
+#'  with percent symbols
+#'@return List of two \code{data.frames}, split into \code{factor} and
+#'  \code{numeric} variables if \code{vnames} contains both classes, single
+#'  \code{data.frame} returned if only one variable class detected in
+#'  \code{vnames} by \code{.
+#'@seealso \code{\link{detectClass}} to see how class is identified.
+#'@importFrom psych describe
+#'@export
 #' @examples
 #' # Examine all variables
-#' dtable(iris2, names(iris2))
+#' \code{dtable(iris2, names(iris2))}
 #'
 #' # Examine single variable
-#' dtable(iris2, "Species")
+#' \code{dtable(iris2, "Species")}
 #'
 #' # Round all output and add percent symbols to factor output
-#' dtable(iris2, names(iris2), neat = TRUE)
+#' \code{dtable(iris2, names(iris2), neat = TRUE)}
 #'
 #' # Raw output
-#' dtable(iris2, names(iris2), neat = FALSE)
+#' \code{dtable(iris2, names(iris2), neat = FALSE)}
 #'
 dtable <- function (data, vnames, neat = TRUE){
 
@@ -67,7 +65,11 @@ dtable <- function (data, vnames, neat = TRUE){
   dtable <- list()
 
   if(length(detected$f) > 0) {
-    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f, dfactor, data = data, neat = neat))
+    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f,
+                                                           dfactor,
+                                                           data = data,
+                                                           neat = neat,
+                                                           sizesort = sizesort))
     if(neat) {
       dataset <- c(deparse(substitute(data)), rep("", nrow(dtable[["factor"]]) - 1))
     } else {
@@ -78,7 +80,11 @@ dtable <- function (data, vnames, neat = TRUE){
   }
 
   if(length(detected$n) > 0) {
-    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$n, dnumeric, data = data, neat = neat))
+    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$n,
+                                                            dnumeric,
+                                                            data = data,
+                                                            neat = neat,
+                                                            sizesort = sizesort))
     dtable[["numeric"]] <- dtable[["numeric"]][, -1]
     if(neat) {
       dataset <- c(deparse(substitute(data)), rep("", nrow(dtable[["numeric"]]) - 1))
@@ -94,24 +100,26 @@ dtable <- function (data, vnames, neat = TRUE){
 
 #' dfactor
 #'
-#' This function converts a column(s) from a \code{data.frame} into a frequencies table
-#' formatted in standard presentation structure with percent symbols.
+#' This function converts a column(s) from a \code{data.frame} into a
+#' frequencies table formatted in standard presentation structure with percent
+#' symbols.
 #'
 #' @param data a \code{data.frame}
 #' @param vnames a vector of variable names from \code{data.frame} to use in
-#'   creation of demographics table, multiple variables produces more specific
-#'   groups.
+#'   creation of demographic frequency table, multiple variables produces more
+#'   specific groups.
 #' @param neat logical, \code{TRUE} returns rounded factor table with percent
 #'   symbols
 #' @param sizesort logical, \code{TRUE} returns table sorted by size
 #' @return Returns a demographic frequency table of varying specificity.
+#' @seealso \link{\code{table}} which this function utilizes.
 #' @export
 #' @examples
 #' # Single demographic
-#' dfactor(iris2, "Species")
+#' \code{dfactor(iris2, "Species")}
 #'
 #' # Two demographics
-#' dfactor(iris2, c("Color", "Species"))
+#' \code{dfactor(iris2, c("Color", "Species"))}
 dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
 
   # First column - Name the demographic from object name
@@ -179,10 +187,10 @@ dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
 #' @export
 #' @examples
 #' # Single variable
-#' dnumeric(iris2, "Sepal.Length")
+#' \code{dnumeric(iris2, "Sepal.Length")}
 #'
 #' # Use dtable for multiple variables
-dnumeric <- function(data, vnames, neat = FALSE) {
+dnumeric <- function(data, vnames, neat = FALSE, sizesort = FALSE) {
   dataset  <- deparse(substitute(data))
   variable <- paste0(vnames)
   descript <- describe(data[, vnames])
@@ -190,6 +198,10 @@ dnumeric <- function(data, vnames, neat = FALSE) {
 
   if (neat) {
     results <- cbind(results[, 1:4], round(results[, 5:length(results)], digits = 1))
+  }
+
+  if (sizesort) {
+    results <- results[order(results[, "mean"], decreasing = TRUE), ]
   }
 
   return(results)
