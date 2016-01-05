@@ -4,8 +4,8 @@
 #' variable names into a list of two vectors based on numeric/integer or factor
 #' class.
 #'
-#' @param data data.frame
-#' @param vnames a vector of variable names from data.frame to classify
+#' @param data1 a \code{data.frame}
+#' @param vnames a vector of variable names from \code{data1} to classify
 #'
 #' @return Returns a list with a vector containing factor variable names, and a
 #'   vector containing numeric variable names.
@@ -16,14 +16,14 @@
 #' data(iris2)
 #'
 #' # All variables
-#' detectClass(iris2, names(iris2))
+#' detect_class(iris2, names(iris2))
 #'
 #' # Single variable
-#' detectClass(iris2, "Species")
-detectClass <- function(data, vnames){
+#' detect_class(iris2, "Species")
+detect_class <- function(data1, vnames){
   detect <- cbind(vnames = vnames, dclass = NA)
   for (i in 1:length(vnames)){
-    detect[, "dclass"][i] <- class(data[, vnames[i]])
+    detect[, "dclass"][i] <- class(data1[, vnames[i]])
   }
 
   detected <- list()
@@ -45,8 +45,8 @@ detectClass <- function(data, vnames){
 #'@return List of two \code{data.frames}, split into \code{factor} and
 #'  \code{numeric} variables if \code{vnames} contains both classes, single
 #'  \code{data.frame} returned if only one variable class detected in
-#'  \code{vnames} by \code{detectClass}.
-#'@seealso \code{\link{detectClass}} to see how class is identified.
+#'  \code{vnames} by \code{detect_class}.
+#'@seealso \code{\link{detect_class}} to see how class is identified.
 #'@importFrom psych describe
 #'@export
 #' @examples
@@ -67,7 +67,7 @@ detectClass <- function(data, vnames){
 #'
 dtable <- function (data, vnames, neat = TRUE, sizesort = TRUE){
 
-  detected <- detectClass(data, vnames)
+  detected <- detect_class(data, vnames)
   dtable <- list()
 
   if(length(detected$f) > 0) {

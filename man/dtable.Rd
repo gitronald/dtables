@@ -19,7 +19,7 @@ with percent symbols}
 List of two \code{data.frames}, split into \code{factor} and
  \code{numeric} variables if \code{vnames} contains both classes, single
  \code{data.frame} returned if only one variable class detected in
- \code{vnames} by \code{detectClass}.
+ \code{vnames} by \code{detect_class}.
 }
 \description{
 Create demographic frequency tables and descriptive statistics tables for R.
@@ -42,6 +42,6 @@ dtable(iris2, names(iris2), neat = FALSE)
 
 }
 \seealso{
-\code{\link{detectClass}} to see how class is identified.
+\code{\link{detect_class}} to see how class is identified.
 }
 
