@@ -28,7 +28,8 @@ detect_class <- function(data1, vnames){
 
   detected <- list()
   detected[["factor"]] <- detect[detect[, "dclass"] == "factor", "vnames"]
-  detected[["numeric"]] <- detect[detect[, "dclass"] %in% c("numeric", "integer"), "vnames"]
+  detected[["numeric"]] <- detect[detect[, "dclass"] == "numeric", "vnames"]
+  detected[["integer"]] <- detect[detect[, "dclass"] == "integer", "vnames"]
 
   return(detected)
 }
