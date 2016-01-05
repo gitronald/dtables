@@ -22,13 +22,13 @@ class.
 }
 \examples{
 # Load sample data
-\\code{data(iris2)}
+data(iris2)
 
 # All variables
-\\code{detectClass(iris2, names(iris2))}
+detectClass(iris2, names(iris2))
 
 # Single variable
-\\code{detectClass(iris2, "Species")}
+detectClass(iris2, "Species")
 }
 \seealso{
 \code{\link{class}} to examine method for extracting class type.
