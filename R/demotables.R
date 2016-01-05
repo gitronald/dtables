@@ -45,25 +45,25 @@ detectClass <- function(data, vnames){
 #'@return List of two \code{data.frames}, split into \code{factor} and
 #'  \code{numeric} variables if \code{vnames} contains both classes, single
 #'  \code{data.frame} returned if only one variable class detected in
-#'  \code{vnames} by \code{.
+#'  \code{vnames} by \code{detectClass}.
 #'@seealso \code{\link{detectClass}} to see how class is identified.
 #'@importFrom psych describe
 #'@export
 #' @examples
 #' # Load sample data
-#' \code{data(iris2)}
+#' data(iris2)
 #'
 #' # Examine all variables
-#' \code{dtable(iris2, names(iris2))}
+#' dtable(iris2, names(iris2))
 #'
 #' # Examine single variable
-#' \code{dtable(iris2, "Species")}
+#' dtable(iris2, "Species")
 #'
 #' # Round all output and add percent symbols to factor output
-#' \code{dtable(iris2, names(iris2), neat = TRUE)}
+#' dtable(iris2, names(iris2), neat = TRUE)
 #'
 #' # Raw output
-#' \code{dtable(iris2, names(iris2), neat = FALSE)}
+#' dtable(iris2, names(iris2), neat = FALSE)
 #'
 dtable <- function (data, vnames, neat = TRUE, sizesort = TRUE){
 
@@ -122,13 +122,13 @@ dtable <- function (data, vnames, neat = TRUE, sizesort = TRUE){
 #' @export
 #' @examples
 #' # Load sample data
-#' \code{data(iris2)}
+#' data(iris2)
 #'
 #' # Single demographic
-#' \code{dfactor(iris2, "Species")}
+#' dfactor(iris2, "Species")
 #'
 #' # Two demographics
-#' \code{dfactor(iris2, c("Color", "Species"))}
+#' dfactor(iris2, c("Color", "Species"))
 dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
 
   # First column - Name the demographic from object name
@@ -197,10 +197,10 @@ dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
 #' @export
 #' @examples
 #' # Single variable
-#' \code{dnumeric(iris2, "Sepal.Length")}
+#' dnumeric(iris2, "Sepal.Length")
 #'
 #' # Use \link{\code{dtable}} for multiple variables
-dnumeric <- function(data, vnames, neat = FALSE, sizesort = FALSE) {
+dnumeric <- function(data, vnames, neat = TRUE, sizesort = FALSE) {
   dataset  <- deparse(substitute(data))
   variable <- paste0(vnames)
   descript <- describe(data[, vnames])

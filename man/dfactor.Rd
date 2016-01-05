@@ -2,7 +2,7 @@
 % Please edit documentation in R/demotables.R
 \name{dfactor}
 \alias{dfactor}
-\title{dfactor}
+\title{Demographic Factor Frequencies Tables}
 \usage{
 dfactor(data, vnames, neat = TRUE, sizesort = TRUE)
 }
@@ -10,8 +10,8 @@ dfactor(data, vnames, neat = TRUE, sizesort = TRUE)
 \item{data}{a \code{data.frame}}
 
 \item{vnames}{a vector of variable names from \code{data.frame} to use in
-creation of demographics table, multiple variables produces more specific
-groups.}
+creation of demographic frequency table, multiple variables produces more
+specific groups.}
 
 \item{neat}{logical, \code{TRUE} returns rounded factor table with percent
 symbols}
@@ -22,14 +22,21 @@ symbols}
 Returns a demographic frequency table of varying specificity.
 }
 \description{
-This function converts a column(s) from a \code{data.frame} into a frequencies table
-formatted in standard presentation structure with percent symbols.
+This function converts a column(s) from a \code{data.frame} into a
+frequencies table formatted in standard presentation structure with percent
+symbols.
 }
 \examples{
+# Load sample data
+data(iris2)
+
 # Single demographic
 dfactor(iris2, "Species")
 
 # Two demographics
 dfactor(iris2, c("Color", "Species"))
+}
+\seealso{
+\link{\code{table}} which this function utilizes.
 }
 

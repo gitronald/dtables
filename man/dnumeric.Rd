@@ -2,9 +2,9 @@
 % Please edit documentation in R/demotables.R
 \name{dnumeric}
 \alias{dnumeric}
-\title{dnumeric}
+\title{Create standard descriptive statistics}
 \usage{
-dnumeric(data, vnames, neat = FALSE)
+dnumeric(data, vnames, neat = TRUE, sizesort = FALSE)
 }
 \arguments{
 \item{data}{a \code{data.frame}}
@@ -12,6 +12,8 @@ dnumeric(data, vnames, neat = FALSE)
 \item{vnames}{a single variable name to examine with \code{psych::describe}}
 
 \item{neat}{logical, returns rounded values if \code{TRUE}}
+
+\item{sizesort}{logical, returns sorted data by mean if \code{TRUE}}
 }
 \value{
 Returns a \code{data.frame} with common descriptive statistics for a
@@ -27,12 +29,12 @@ variables.
 # Single variable
 dnumeric(iris2, "Sepal.Length")
 
-# Use dtable for multiple variables
+# Use \\link{\\code{dtable}} for multiple variables
 }
 \seealso{
 See \code{\link{dtable}}
 
-See \code{\link[psych]{describe}} for details on the descriptives
-  returned
+See \code{\link[psych]{describe}} for more details on the
+  descriptive statistics returned
 }
 

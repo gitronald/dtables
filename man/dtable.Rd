@@ -2,28 +2,32 @@
 % Please edit documentation in R/demotables.R
 \name{dtable}
 \alias{dtable}
-\title{dtable}
+\title{Create a demographics style summary of variables}
 \usage{
-dtable(data, vnames, neat = TRUE)
+dtable(data, vnames, neat = TRUE, sizesort = TRUE)
 }
 \arguments{
-\item{data}{data.frame}
+\item{data}{a \code{data.frame}}
 
-\item{vnames}{a vector of variable names from \code{data.frame} to use in creation of
-demographic tables}
+\item{vnames}{all, or a subset \code{vector} of variable names from
+\code{data.frame}}
 
-\item{neat}{logical, \code{TRUE} returns rounded factor table with percent
-symbols}
+\item{neat}{logical, defaults to \code{TRUE} and returns rounded factor table
+with percent symbols}
 }
 \value{
-List of two \code{data.frame}s, split into factor and numeric variables if
-  \code{vnames} contains both classes, single \code{data.frame} returned if only one
-  variable class detected in \code{vnames}.
+List of two \code{data.frames}, split into \code{factor} and
+ \code{numeric} variables if \code{vnames} contains both classes, single
+ \code{data.frame} returned if only one variable class detected in
+ \code{vnames} by \code{detectClass}.
 }
 \description{
-Demographic frequency tables and descriptive statistics tables for R.
+Create demographic frequency tables and descriptive statistics tables for R.
 }
 \examples{
+# Load sample data
+data(iris2)
+
 # Examine all variables
 dtable(iris2, names(iris2))
 
@@ -32,5 +36,12 @@ dtable(iris2, "Species")
 
 # Round all output and add percent symbols to factor output
 dtable(iris2, names(iris2), neat = TRUE)
+
+# Raw output
+dtable(iris2, names(iris2), neat = FALSE)
+
+}
+\seealso{
+\code{\link{detectClass}} to see how class is identified.
 }
 

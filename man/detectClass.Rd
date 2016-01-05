@@ -2,7 +2,7 @@
 % Please edit documentation in R/demotables.R
 \name{detectClass}
 \alias{detectClass}
-\title{detectClass}
+\title{Detect Variable Classes}
 \usage{
 detectClass(data, vnames)
 }
@@ -21,11 +21,14 @@ variable names into a list of two vectors based on numeric/integer or factor
 class.
 }
 \examples{
+# Load sample data
+\\code{data(iris2)}
+
 # All variables
-detectClass(iris2, names(iris2))
+\\code{detectClass(iris2, names(iris2))}
 
 # Single variable
-detectClass(iris2, "Species")
+\\code{detectClass(iris2, "Species")}
 }
 \seealso{
 \code{\link{class}} to examine method for extracting class type.
