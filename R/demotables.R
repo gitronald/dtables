@@ -13,13 +13,13 @@
 #' @export
 #' @examples
 #' # Load sample data
-#' \code{data(iris2)}
+#' data(iris2)
 #'
 #' # All variables
-#' \code{detectClass(iris2, names(iris2))}
+#' detectClass(iris2, names(iris2))
 #'
 #' # Single variable
-#' \code{detectClass(iris2, "Species")}
+#' detectClass(iris2, "Species")
 detectClass <- function(data, vnames){
   detect <- cbind(vnames = vnames, dclass = NA)
   for (i in 1:length(vnames)){
