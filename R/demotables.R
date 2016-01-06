@@ -39,13 +39,15 @@ detect_class <- function(data1, vnames){
 #'Create demographic frequency tables and descriptive statistics tables for R.
 #'
 #'@param data a \code{data.frame}
-#'@param vnames all, or a subset \code{vector} of variable names from
+#'@param vnames all, or a subset \code{vector} of variable names from 
 #'  \code{data.frame}
-#'@param neat logical, defaults to \code{TRUE} and returns rounded factor table
+#'@param neat logical, defaults to \code{TRUE} and returns rounded factor table 
 #'  with percent symbols
-#'@return List of two \code{data.frames}, split into \code{factor} and
-#'  \code{numeric} variables if \code{vnames} contains both classes, single
-#'  \code{data.frame} returned if only one variable class detected in
+#'@param sizesort logical, returns data sorted by frequency and mean if
+#'  \code{TRUE}
+#'@return List of two \code{data.frames}, split into \code{factor} and 
+#'  \code{numeric} variables if \code{vnames} contains both classes, single 
+#'  \code{data.frame} returned if only one variable class detected in 
 #'  \code{vnames} by \code{detect_class}.
 #'@seealso \code{\link{detect_class}} to see how class is identified.
 #'@importFrom psych describe
@@ -70,7 +72,7 @@ dtable <- function (data, vnames, neat = TRUE, sizesort = TRUE){
 
   detected <- detect_class(data, vnames)
   dtable <- list()
-
+  
   if(length(detected$f) > 0) {
     dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f,
                                                            dfactor,

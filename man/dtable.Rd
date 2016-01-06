@@ -9,16 +9,19 @@ dtable(data, vnames, neat = TRUE, sizesort = TRUE)
 \arguments{
 \item{data}{a \code{data.frame}}
 
-\item{vnames}{all, or a subset \code{vector} of variable names from
+\item{vnames}{all, or a subset \code{vector} of variable names from 
 \code{data.frame}}
 
-\item{neat}{logical, defaults to \code{TRUE} and returns rounded factor table
+\item{neat}{logical, defaults to \code{TRUE} and returns rounded factor table 
 with percent symbols}
+
+\item{sizesort}{logical, returns data sorted by frequency and mean if
+\code{TRUE}}
 }
 \value{
-List of two \code{data.frames}, split into \code{factor} and
- \code{numeric} variables if \code{vnames} contains both classes, single
- \code{data.frame} returned if only one variable class detected in
+List of two \code{data.frames}, split into \code{factor} and 
+ \code{numeric} variables if \code{vnames} contains both classes, single 
+ \code{data.frame} returned if only one variable class detected in 
  \code{vnames} by \code{detect_class}.
 }
 \description{
