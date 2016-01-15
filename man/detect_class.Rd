@@ -4,7 +4,7 @@
 \alias{detect_class}
 \title{Detect Variable Classes}
 \usage{
-detect_class(data1, vnames)
+detect_class(data1, vnames = "")
 }
 \arguments{
 \item{data1}{a \code{data.frame}}
