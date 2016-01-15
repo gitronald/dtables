@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^lab$
+^cran-comments\.md$
+^data-raw$
+^revdep$
