@@ -20,7 +20,12 @@
 #'
 #' # Single variable
 #' detect_class(iris2, "Species")
-detect_class <- function(data1, vnames){
+detect_class <- function(data1, vnames = ""){
+
+  if(vnames == ""){
+    vnames <- names(data1)
+  }
+
   detect <- cbind(vnames = vnames, dclass = NA)
   for (i in 1:length(vnames)){
     detect[, "dclass"][i] <- class(data1[, vnames[i]])
@@ -34,24 +39,25 @@ detect_class <- function(data1, vnames){
   return(detected)
 }
 
-#'Create a demographics style summary of variables
+#' Generate demographic frequencies and descriptive statistics tables
 #'
-#'Create demographic frequency tables and descriptive statistics tables for R.
+#' Generate demographic frequencies tables and descriptive statistics tables in
+#' data.frame format for R.
 #'
-#'@param data a \code{data.frame}
-#'@param vnames all, or a subset \code{vector} of variable names from 
-#'  \code{data.frame}
-#'@param neat logical, defaults to \code{TRUE} and returns rounded factor table 
-#'  with percent symbols
-#'@param sizesort logical, returns data sorted by frequency and mean if
-#'  \code{TRUE}
-#'@return List of two \code{data.frames}, split into \code{factor} and 
-#'  \code{numeric} variables if \code{vnames} contains both classes, single 
-#'  \code{data.frame} returned if only one variable class detected in 
-#'  \code{vnames} by \code{detect_class}.
-#'@seealso \code{\link{detect_class}} to see how class is identified.
-#'@importFrom psych describe
-#'@export
+#' @param data a \code{data.frame}
+#' @param vnames all, or a subset \code{vector} of variable names from
+#'   \code{data.frame}
+#' @param neat logical, defaults to \code{TRUE} and returns rounded factor table
+#'   with percent symbols
+#' @param sizesort logical, returns data sorted by frequency and mean if
+#'   \code{TRUE}
+#' @return List of two \code{data.frames}, split into \code{factor} and
+#'   \code{numeric} variables if \code{vnames} contains both classes, single
+#'   \code{data.frame} returned if only one variable class detected in
+#'   \code{vnames} by \code{detect_class}.
+#' @seealso \code{\link{detect_class}} to see how class is identified.
+#' @importFrom psych describe
+#' @export
 #' @examples
 #' # Load sample data
 #' data(iris2)
@@ -68,11 +74,15 @@ detect_class <- function(data1, vnames){
 #' # Raw output
 #' dtable(iris2, names(iris2), neat = FALSE)
 #'
-dtable <- function (data, vnames, neat = TRUE, sizesort = TRUE){
+dtable <- function (data, vnames = "", neat = TRUE, sizesort = TRUE){
+
+  if(vnames == ""){
+    vnames <- names(data)
+  }
 
   detected <- detect_class(data, vnames)
   dtable <- list()
-  
+
   if(length(detected$f) > 0) {
     dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f,
                                                            dfactor,
