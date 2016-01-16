@@ -84,10 +84,8 @@ dtable <- function (data, vnames = "", neat = TRUE, sizesort = TRUE){
   dtable <- list()
 
   if(length(detected$f) > 0) {
-    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f,
-                                                           dfactor,
-                                                           data = data,
-                                                           neat = neat,
+    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f, dfactor,
+                                                           data = data, neat = neat,
                                                            sizesort = sizesort))
     if(neat) {
       dataset <- c(deparse(substitute(data)), rep("", nrow(dtable[["factor"]]) - 1))
@@ -99,10 +97,8 @@ dtable <- function (data, vnames = "", neat = TRUE, sizesort = TRUE){
   }
 
   if(length(detected$n) > 0) {
-    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$n,
-                                                            dnumeric,
-                                                            data = data,
-                                                            neat = neat,
+    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$n,dnumeric,
+                                                            data = data, neat = neat,
                                                             sizesort = sizesort))
     dtable[["numeric"]] <- dtable[["numeric"]][, -1]
     if(neat) {
