@@ -1,8 +1,8 @@
-#' Detect Variable Classes
+#' Data.frame of Variables and Classes
 #'
-#' Helper function for \code{\link{dtable}}. Obtains column classes and splits
-#' variable names into a list of two vectors based on numeric/integer or factor
-#' class.
+#' Helper function for \code{\link{dtable}}. Returns information about variable
+#' class in an informative way column classes and splits variable names into a
+#' list of two vectors based on numeric/integer or factor class.
 #'
 #' @param data1 a \code{data.frame}
 #' @param vnames a vector of variable names from \code{data1} to classify
@@ -20,24 +20,16 @@
 #'
 #' # Single variable
 #' dclass(iris2, "Species")
-dclass <- function(data1, vnames = NULL){
+dclass <- function(data1, as.list = TRUE){
 
-  if (is.null(vnames)) vnames <- names(data1)  # Default selection to all variables
-
-  detect <- cbind(vnames = vnames, dclass = NA)  # Initialize data.frame
-  for (i in 1:length(vnames)){
-    detect[, "dclass"][i] <- class(data1[, vnames[i]])  # Fill class variable
-  }
-
-  detected <- list()
-  detected[["character"]] <- detect[detect[, "dclass"] == "character", "vnames"]
-  detected[["integer"]] <- detect[detect[, "dclass"] == "integer", "vnames"]
-  detected[["factor"]] <- detect[detect[, "dclass"] == "factor", "vnames"]
-  detected[["logical"]] <- detect[detect[, "dclass"] == "logical", "vnames"]
-  detected[["numeric"]] <- detect[detect[, "dclass"] == "numeric", "vnames"]
-
-  return(detected)
+  data1 <- as.data.frame((unlist(sapply(data1, class))))
+  data1 <- setNames(data.frame(row.names(data1), data1),
+                    c("variable", "class"))
+  row.names(data1) <- NULL
+  if (as.list) data1 <- split(data1, data1[["class"]])
+  return(data1)
 }
+
 
 #' Generate demographic frequencies and descriptive statistics tables
 #'
