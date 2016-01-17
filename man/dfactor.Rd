@@ -4,11 +4,9 @@
 \alias{dfactor}
 \title{Demographic Factor Frequencies Tables}
 \usage{
-dfactor(data, vnames, neat = TRUE, sizesort = TRUE)
+dfactor(data1, vnames, neat = TRUE, sizesort = TRUE)
 }
 \arguments{
-\item{data}{a \code{data.frame}}
-
 \item{vnames}{a vector of variable names from \code{data.frame} to use in
 creation of demographic frequency table, multiple variables produces more
 specific groups.}
@@ -17,6 +15,8 @@ specific groups.}
 symbols}
 
 \item{sizesort}{logical, \code{TRUE} returns table sorted by size}
+
+\item{data}{a \code{data.frame}}
 }
 \value{
 Returns a demographic frequency table of varying specificity.
@@ -27,9 +27,6 @@ frequencies table formatted in standard presentation structure with percent
 symbols.
 }
 \examples{
-# Load sample data
-data(iris2)
-
 # Single demographic
 dfactor(iris2, "Species")
 

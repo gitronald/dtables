@@ -4,19 +4,20 @@
 \alias{dtable}
 \title{Generate demographic frequencies and descriptive statistics tables}
 \usage{
-dtable(data, vnames = NULL, neat = TRUE, sizesort = TRUE)
+dtable(data1, frequencies = NULL, describe = NULL, neat = TRUE,
+  as.list = FALSE, sizesort = TRUE)
 }
 \arguments{
-\item{data}{a \code{data.frame}}
-
-\item{vnames}{all, or a subset \code{vector} of variable names from
-\code{data.frame}}
-
 \item{neat}{logical, defaults to \code{TRUE} and returns rounded factor table
 with percent symbols}
 
 \item{sizesort}{logical, returns data sorted by frequency and mean if
 \code{TRUE}}
+
+\item{data}{a \code{data.frame}}
+
+\item{vnames}{all, or a subset \code{vector} of variable names from
+\code{data.frame}}
 }
 \value{
 List of two \code{data.frames}, split into \code{factor} and
@@ -29,20 +30,17 @@ Generate demographic frequencies tables and descriptive statistics tables in
 data.frame format for R.
 }
 \examples{
-# Load sample data
-data(iris2)
-
 # Examine all variables
-dtable(iris2, names(iris2))
+dtable(iris2)
 
-# Examine single variable
+# Examine single variable - Out of service
 dtable(iris2, "Species")
 
-# Round all output and add percent symbols to factor output
-dtable(iris2, names(iris2), neat = TRUE)
+# Examine two or more variables  - Out of service
+dtable(iris2, c("Attractiveness", "Species"))
 
 # Raw output
-dtable(iris2, names(iris2), neat = FALSE)
+dtable(iris2, neat = FALSE)
 
 }
 \seealso{

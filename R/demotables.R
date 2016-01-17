@@ -18,59 +18,61 @@
 #' @importFrom psych describe
 #' @export
 #' @examples
-#' # Load sample data
-#' data(iris2)
-#'
 #' # Examine all variables
-#' dtable(iris2, names(iris2))
+#' dtable(iris2)
 #'
-#' # Examine single variable
+#' # Examine single variable - Out of service
 #' dtable(iris2, "Species")
 #'
-#' # Round all output and add percent symbols to factor output
-#' dtable(iris2, names(iris2), neat = TRUE)
+#' # Examine two or more variables  - Out of service
+#' dtable(iris2, c("Attractiveness", "Species"))
 #'
 #' # Raw output
-#' dtable(iris2, names(iris2), neat = FALSE)
+#' dtable(iris2, neat = FALSE)
 #'
-dtable <- function (data, vnames = NULL, neat = TRUE, sizesort = TRUE){
+dtable <- function (data1, frequencies = NULL, describe = NULL, neat = TRUE, as.list = FALSE, sizesort = TRUE){
 
-  if (is.null(vnames)) vnames <- names(data1)  # Default selection to all variables
+  var.details  <- dvariable(data1)                                # Extract variable details
 
-  col.data  <- dvariable(data)
-  col.data  <- split(col.data, col.data[["type"]])
-  dtable <- list()
-
-  if(length(col.data[["character"]]) > 0) {
-    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(col.data[["character"]][["variable"]], dfactor,
-                                                           data = data, neat = neat,
-                                                           sizesort = sizesort))
-    if(neat) {
-      dataset <- c(deparse(substitute(data)), rep("", nrow(dtable[["factor"]]) - 1))
-    } else {
-      dataset <- rep(deparse(substitute(data)), nrow(dtable[["factor"]]))
-    }
-
-    dtable[["factor"]] <- cbind(dataset, dtable[["factor"]])
-    row.names(dtable[["factor"]]) <- NULL
+  if (is.null(describe)) {    # Default selection to all variables
+    descriptives <- c("numeric", "integer")
+    descriptives <- unlist(lapply(descriptives, function(x) extract(var.details, "class", x, "variable")))
   }
 
-  if(length(class.data$n) > 0) {
-    class.data$numeric$variable
-    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(class.data$numeric$variable,dnumeric,
-                                                            data = data, neat = neat,
-                                                            sizesort = sizesort))
-    dtable[["numeric"]] <- dtable[["numeric"]][, -1]
-    if(neat) {
-      dataset <- c(deparse(substitute(data)), rep("", nrow(dtable[["numeric"]]) - 1))
-    } else {
-      dataset <- rep(deparse(substitute(data)), nrow(dtable[["numeric"]]))
-    }
-    dtable[["numeric"]] <- cbind(dataset, dtable[["numeric"]])
-    row.names(dtable[["numeric"]]) <- NULL
+  if (is.null(frequencies)) {     # Default selection to all variables
+    frequencies <- c("character", "factor", "integer", "logical") # Obtain names for descriptive frequencies
+    frequencies <- unlist(lapply(frequencies, function(x) extract(var.details, "class", x, "variable")))
+  }
+
+  dtable <- create_list(c("Freq", "Desc"), 1)
+
+  for (i in frequencies){
+    dtable$Freq <- lapply(frequencies, dfactor,
+                          data = data1, neat = neat,
+                          sizesort = sizesort)
+  }
+
+  for (i in descriptives){
+    dtable$Desc <- lapply(descriptives, dnumeric,
+                          data = data1, neat = neat,
+                          sizesort = sizesort)
+  }
+
+  if(!as.list){
+    dtable$Freq <- do.call(rbind, dtable$Freq)
+    dtable$Desc <- do.call(rbind, dtable$Desc)
   }
 
   return(dtable)
+}
+
+
+extract <- function(data1, selectCol = NULL, selectRows = NULL, column = NULL){
+  if (sum(sapply(c(selectCol, selectRows, column), length)) > 0) {
+    data1 <- paste(data1[data1[selectCol] == selectRows, paste(column)])
+  }
+
+  return(data1)
 }
 
 #' Demographic Factor Frequencies Tables
@@ -90,23 +92,21 @@ dtable <- function (data, vnames = NULL, neat = TRUE, sizesort = TRUE){
 #' @seealso \link{\code{table}} which this function utilizes.
 #' @export
 #' @examples
-#' # Load sample data
-#' data(iris2)
-#'
 #' # Single demographic
 #' dfactor(iris2, "Species")
 #'
 #' # Two demographics
 #' dfactor(iris2, c("Color", "Species"))
-dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
+dfactor <- function (data1, vnames, neat = TRUE, sizesort = TRUE) {
 
   # First column - Name the demographic from object name
-  Demographic <- vector()
+  Dataset <- rep(deparse(substitute(data1)), length(table(data1[, vnames])))
+  Demographic <- vector(mode = "logical", length(table(data1[, vnames])))
   DemoName    <- paste0(vnames)
-  Demographic <- rep(DemoName, (length(table(data[vnames]))))
+  Demographic <- rep(DemoName, length(table(data1[vnames])))
 
   # Second & Third columns - Demographic factors and frequency counts
-  dgroup <- table(data[, vnames])
+  dgroup <- table(data1[, vnames])
   dgroup <- data.frame(dgroup)
 
   # Fourth column - Percent value of frequency count
@@ -124,7 +124,8 @@ dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
 
     # If only one variable, remove repetitive demographic IDs (presentation format)
     if (length(vnames) == 1) {
-      Demographic <- c(DemoName, rep("", (length(table(data[vnames])) - 1)))
+      Dataset <- c(Dataset[1], rep("", (length(table(data1[, vnames])) - 1)))
+      Demographic <- c(DemoName, rep("", (length(table(data1[, vnames])) - 1)))
     }
   }
 
@@ -140,7 +141,7 @@ dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
     dgroup <- dgroup[order(dgroup[, "Freq"], decreasing = TRUE), ]
   }
 
-  dgroup <- cbind(Demographic, dgroup)
+  dgroup <- cbind(Dataset, Demographic, dgroup)
   rownames(dgroup) <- NULL
 
   return(dgroup)
@@ -172,7 +173,7 @@ dfactor <- function (data, vnames, neat = TRUE, sizesort = TRUE) {
 dnumeric <- function(data, vnames, neat = TRUE, sizesort = FALSE) {
   dataset  <- deparse(substitute(data))
   variable <- paste0(vnames)
-  descript <- describe(data[, vnames])
+  descript <- describe(as.numeric(data[, vnames]))
   results  <- cbind(dataset, variable, descript)
 
   if (neat) {
