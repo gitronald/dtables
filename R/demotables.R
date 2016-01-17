@@ -19,7 +19,7 @@
 #' dclass(iris2, as.list = TRUE)
 dclass <- function(data1, as.list = FALSE){
 
-  data1 <- sapply(data1, class)                           # Collect data
+  data1 <- lapply(data1, class)                           # Collect data
   data1 <- data.frame((unlist(data1)))                    # Shape data
   data1 <- pull_rownames(data1)                           # Pull in row names
   data1 <- setNames(data1, c("variable", "class"))        # Set column names
