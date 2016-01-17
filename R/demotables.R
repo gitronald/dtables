@@ -4,11 +4,9 @@
 #' class in a \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
 #'
 #' @param data1 a \code{data.frame}
-#' @param vnames a vector of variable names from \code{data1} to classify
-#'
 #' @return Returns a data.frame or list with the variable names and their
 #'   respective classes. Returns a data.frame by default.
-#' @seealso \code{\link{class}} to examine method for extracting class type.
+#' @seealso \code{\link{class}} to examine method for extracting class.
 #' @export
 #' @examples
 #' # Load sample data
@@ -21,11 +19,18 @@
 #' dclass(iris2, as.list = TRUE)
 dclass <- function(data1, as.list = FALSE){
 
-  data1 <- as.data.frame((unlist(sapply(data1, class))))
-  data1 <- setNames(data.frame(row.names(data1), data1),
-                    c("variable", "class"))
+  data1 <- sapply(data1, class)                           # Collect data
+  data1 <- data.frame((unlist(data1)))                    # Shape data
+  data1 <- pull_rownames(data1)                           # Pull in row names
+  data1 <- setNames(data1, c("variable", "class"))        # Set column names
+  if (as.list) data1 <- split(data1, data1[["class"]])    # If, convert to list
+
+  return(data1)
+}
+
+pull_rownames <- function(data1){
+  data1 <- data.frame(row.names(data1), data1)
   row.names(data1) <- NULL
-  if (as.list) data1 <- split(data1, data1[["class"]])
   return(data1)
 }
 
@@ -67,13 +72,13 @@ dclass <- function(data1, as.list = FALSE){
 #'
 dtable <- function (data, vnames = NULL, neat = TRUE, sizesort = TRUE){
 
-  if (is.null(vnames)) vnames <- names(data1)  # Default selection  to all variables
+  if (is.null(vnames)) vnames <- names(data1)  # Default selection to all variables
 
-  detected <- dclass(data, as.list = TRUE)
+  class.data  <- dclass(data, as.list = TRUE)
   dtable <- list()
 
-  if(length(detected$f) > 0) {
-    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$factor$variable, dfactor,
+  if(length(type[["factor"]]) > 0) {
+    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(class.data$factor$variable, dfactor,
                                                            data = data, neat = neat,
                                                            sizesort = sizesort))
     if(neat) {
@@ -85,9 +90,9 @@ dtable <- function (data, vnames = NULL, neat = TRUE, sizesort = TRUE){
     row.names(dtable[["factor"]]) <- NULL
   }
 
-  if(length(detected$n) > 0) {
-    detected$numeric$variable
-    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$numeric$variable,dnumeric,
+  if(length(class.data$n) > 0) {
+    class.data$numeric$variable
+    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(class.data$numeric$variable,dnumeric,
                                                             data = data, neat = neat,
                                                             sizesort = sizesort))
     dtable[["numeric"]] <- dtable[["numeric"]][, -1]
