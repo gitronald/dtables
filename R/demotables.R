@@ -28,6 +28,29 @@ dclass <- function(data1, as.list = FALSE){
   return(data1)
 }
 
+dmode <- function(data1, as.list = FALSE){
+
+  data1 <- lapply(data1, mode)                            # Collect data
+  data1 <- data.frame((unlist(data1)))                    # Shape data
+  data1 <- pull_rownames(data1)                           # Pull in row names
+  data1 <- setNames(data1, c("variable", "mode"))        # Set column names
+  if (as.list) data1 <- split(data1, data1[["mode"]])    # If, convert to list
+
+  return(data1)
+}
+
+dtypeof <- function(data1, as.list = FALSE){
+
+  data1 <- lapply(data1, typeof)                            # Collect data
+  data1 <- data.frame((unlist(data1)))                    # Shape data
+  data1 <- pull_rownames(data1)                           # Pull in row names
+  data1 <- setNames(data1, c("variable", "typeof"))        # Set column names
+  if (as.list) data1 <- split(data1, data1[["typeof"]])    # If, convert to list
+
+  return(data1)
+}
+
+
 pull_rownames <- function(data1){
   data1 <- data.frame(row.names(data1), data1)
   row.names(data1) <- NULL
