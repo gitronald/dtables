@@ -56,7 +56,9 @@ dtypeof <- function(data1, as.list = FALSE){
 
 dvariable <- function(data1){
   if (!("data.frame" %in% class(data1))) {
-    stop("Input 'data1' must be of class data.frame")
+    warning("Input 'data1' should be a data.frame,
+            attempting to coerce input to data.frame")
+    data1 <- as.data.frame(data1)
   }
   variable <- names(data1)
   class    <- dclass(data1)[, 2]
