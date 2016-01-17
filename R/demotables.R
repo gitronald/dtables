@@ -20,7 +20,7 @@
 #'
 #' # Single variable
 #' dclass(iris2, "Species")
-dclass <- function(data1, vnames){
+dclass <- function(data1, vnames = NULL){
 
   if (is.null(vnames)) vnames <- names(data1)  # Default to all variables
 
@@ -72,11 +72,9 @@ dclass <- function(data1, vnames){
 #' # Raw output
 #' dtable(iris2, names(iris2), neat = FALSE)
 #'
-dtable <- function (data, vnames = "", neat = TRUE, sizesort = TRUE){
+dtable <- function (data, vnames = NULL, neat = TRUE, sizesort = TRUE){
 
-  if(vnames == ""){
-    vnames <- names(data)
-  }
+  if (is.null(vnames)) vnames <- names(data1)  # Default to all variables
 
   detected <- dclass(data, vnames)
   dtable <- list()
