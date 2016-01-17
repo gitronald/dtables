@@ -18,21 +18,19 @@
 #' # Return variable and class data in list
 #' dclass(iris2, as.list = TRUE)
 dclass <- function(data1, as.list = FALSE){
-
-  data1 <- lapply(data1, class)                           # Collect data
-  data1 <- data.frame((unlist(data1)))                    # Shape data
-  data1 <- pull_rownames(data1)                           # Pull in row names
-  data1 <- setNames(data1, c("variable", "class"))        # Set column names
-  if (as.list) data1 <- split(data1, data1[["class"]])    # If, convert to list
+  data1 <- lapply(data1, class)                          # Collect data
+  data1 <- data.frame((unlist(data1)))                   # Shape data
+  data1 <- pull_rownames(data1)                          # Pull in row names
+  data1 <- setNames(data1, c("variable", "class"))       # Set column names
+  if (as.list) data1 <- split(data1, data1[["class"]])   # If, convert to list
 
   return(data1)
 }
 
 dmode <- function(data1, as.list = FALSE){
-
-  data1 <- lapply(data1, mode)                            # Collect data
-  data1 <- data.frame((unlist(data1)))                    # Shape data
-  data1 <- pull_rownames(data1)                           # Pull in row names
+  data1 <- lapply(data1, mode)                           # Collect data
+  data1 <- data.frame((unlist(data1)))                   # Shape data
+  data1 <- pull_rownames(data1)                          # Pull in row names
   data1 <- setNames(data1, c("variable", "mode"))        # Set column names
   if (as.list) data1 <- split(data1, data1[["mode"]])    # If, convert to list
 
@@ -40,16 +38,27 @@ dmode <- function(data1, as.list = FALSE){
 }
 
 dtypeof <- function(data1, as.list = FALSE){
-
-  data1 <- lapply(data1, typeof)                            # Collect data
-  data1 <- data.frame((unlist(data1)))                    # Shape data
-  data1 <- pull_rownames(data1)                           # Pull in row names
-  data1 <- setNames(data1, c("variable", "typeof"))        # Set column names
-  if (as.list) data1 <- split(data1, data1[["typeof"]])    # If, convert to list
+  data1 <- lapply(data1, typeof)                        # Collect data
+  data1 <- data.frame((unlist(data1)))                  # Shape data
+  data1 <- pull_rownames(data1)                         # Pull in row names
+  data1 <- setNames(data1, c("variable", "typeof"))     # Set column names
+  if (as.list) data1 <- split(data1, data1[["typeof"]]) # If, convert to list
 
   return(data1)
 }
 
+dvariable <- function(data1){
+  if (!("data.frame" %in% class(data1))) {
+    stop("Input 'data1' must be of class data.frame")
+  }
+  variable <- names(data1)
+  class    <- dclass(data1)[, 2]
+  mode     <- dmode(data1)[, 2]
+  type     <- dtypeof(data1)[, 2]
+  data2 <- data.frame(variable, class, mode, type)
+
+  return(data2)
+}
 
 pull_rownames <- function(data1){
   data1 <- data.frame(row.names(data1), data1)
