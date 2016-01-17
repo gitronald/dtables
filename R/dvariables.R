@@ -54,16 +54,22 @@ dtypeof <- function(data1, as.list = FALSE){
   return(data1)
 }
 
-dvariable <- function(data1){
+dvariable <- function(data1, vars = NULL){
   if (!("data.frame" %in% class(data1))) {
     warning("Input 'data1' should be a data.frame,
             attempting to coerce input to data.frame")
     data1 <- as.data.frame(data1)
   }
-  variable <- names(data1)
-  class    <- dclass(data1)[, 2]
-  mode     <- dmode(data1)[, 2]
-  type     <- dtypeof(data1)[, 2]
+  if (is.null(vars)) {           # Default to all variables
+    variable <- names(data1)
+  } else {
+    data1    <- setNames(data.frame(data1[, vars]), vars)    # Or use a selection
+    variable <- names(data1)
+  }
+
+  class <- dclass(data1)[, 2]
+  mode  <- dmode(data1)[, 2]
+  type  <- dtypeof(data1)[, 2]
   data2 <- data.frame(variable, class, mode, type)
 
   return(data2)
