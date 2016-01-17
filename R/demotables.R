@@ -13,22 +13,20 @@
 #' @export
 #' @examples
 #' # Load sample data
-#' data(iris2)
+#' dclass(iris2)
 #'
 #' # All variables
-#' detect_class(iris2, names(iris2))
+#' dclass(iris2, names(iris2))
 #'
 #' # Single variable
-#' detect_class(iris2, "Species")
-detect_class <- function(data1, vnames = ""){
+#' dclass(iris2, "Species")
+dclass <- function(data1, vnames){
 
-  if(vnames == ""){
-    vnames <- names(data1)
-  }
+  if (is.null(vnames)) vnames <- names(data1)  # Default to all variables
 
-  detect <- cbind(vnames = vnames, dclass = NA)
+  detect <- cbind(vnames = vnames, dclass = NA)  # Initialize data.frame
   for (i in 1:length(vnames)){
-    detect[, "dclass"][i] <- class(data1[, vnames[i]])
+    detect[, "dclass"][i] <- class(data1[, vnames[i]])  # Fill class variable with
   }
 
   detected <- list()
@@ -54,8 +52,8 @@ detect_class <- function(data1, vnames = ""){
 #' @return List of two \code{data.frames}, split into \code{factor} and
 #'   \code{numeric} variables if \code{vnames} contains both classes, single
 #'   \code{data.frame} returned if only one variable class detected in
-#'   \code{vnames} by \code{detect_class}.
-#' @seealso \code{\link{detect_class}} to see how class is identified.
+#'   \code{vnames} by \code{dclass}.
+#' @seealso \code{\link{dclass}} to see how class is identified.
 #' @importFrom psych describe
 #' @export
 #' @examples
@@ -80,7 +78,7 @@ dtable <- function (data, vnames = "", neat = TRUE, sizesort = TRUE){
     vnames <- names(data)
   }
 
-  detected <- detect_class(data, vnames)
+  detected <- dclass(data, vnames)
   dtable <- list()
 
   if(length(detected$f) > 0) {
