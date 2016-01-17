@@ -22,17 +22,19 @@
 #' dclass(iris2, "Species")
 dclass <- function(data1, vnames = NULL){
 
-  if (is.null(vnames)) vnames <- names(data1)  # Default to all variables
+  if (is.null(vnames)) vnames <- names(data1)  # Default selection to all variables
 
   detect <- cbind(vnames = vnames, dclass = NA)  # Initialize data.frame
   for (i in 1:length(vnames)){
-    detect[, "dclass"][i] <- class(data1[, vnames[i]])  # Fill class variable with
+    detect[, "dclass"][i] <- class(data1[, vnames[i]])  # Fill class variable
   }
 
   detected <- list()
-  detected[["factor"]] <- detect[detect[, "dclass"] == "factor", "vnames"]
-  detected[["numeric"]] <- detect[detect[, "dclass"] == "numeric", "vnames"]
+  detected[["character"]] <- detect[detect[, "dclass"] == "character", "vnames"]
   detected[["integer"]] <- detect[detect[, "dclass"] == "integer", "vnames"]
+  detected[["factor"]] <- detect[detect[, "dclass"] == "factor", "vnames"]
+  detected[["logical"]] <- detect[detect[, "dclass"] == "logical", "vnames"]
+  detected[["numeric"]] <- detect[detect[, "dclass"] == "numeric", "vnames"]
 
   return(detected)
 }
