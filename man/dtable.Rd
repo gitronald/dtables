@@ -4,8 +4,8 @@
 \alias{dtable}
 \title{Generate demographic frequencies and descriptive statistics tables}
 \usage{
-dtable(data1, frequencies = NULL, describe = NULL, neat = TRUE,
-  as.list = FALSE, sizesort = TRUE)
+dtable(data1, variables = NULL, frequencies = NULL, descriptives = NULL,
+  neat = TRUE, as.list = FALSE, sizesort = TRUE)
 }
 \arguments{
 \item{neat}{logical, defaults to \code{TRUE} and returns rounded factor table

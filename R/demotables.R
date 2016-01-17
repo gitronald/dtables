@@ -30,19 +30,24 @@
 #' # Raw output
 #' dtable(iris2, neat = FALSE)
 #'
-dtable <- function (data1, frequencies = NULL, describe = NULL, neat = TRUE, as.list = FALSE, sizesort = TRUE){
+dtable <- function (data1,
+                    variables = NULL,
+                    frequencies = NULL,
+                    descriptives = NULL,
+                    neat = TRUE, as.list = FALSE, sizesort = TRUE){
 
-  var.details  <- dvariable(data1)                                # Extract variable details
+  var.details  <- dvariable(data1, variables)  # Extract variable details
 
-  if (is.null(describe)) {    # Default selection to all variables
-    descriptives <- c("numeric", "integer")
-    descriptives <- unlist(lapply(descriptives, function(x) extract(var.details, "class", x, "variable")))
+  if (is.null(descriptives)) { # Default selection to all variables
+    descriptives <- c("numeric", "integer")           # Obtain names for descriptive statistics
   }
 
-  if (is.null(frequencies)) {     # Default selection to all variables
+  if (is.null(frequencies)) { # Default selection to all variables
     frequencies <- c("character", "factor", "integer", "logical") # Obtain names for descriptive frequencies
-    frequencies <- unlist(lapply(frequencies, function(x) extract(var.details, "class", x, "variable")))
   }
+
+  frequencies <- unlist(lapply(frequencies, function(x) extract(var.details, "class", x, "variable")))
+  descriptives <- unlist(lapply(descriptives, function(x) extract(var.details, "class", x, "variable")))
 
   dtable <- create_list(c("Freq", "Desc"), 1)
 
