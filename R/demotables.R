@@ -1,26 +1,25 @@
 #' Data.frame of Variables and Classes
 #'
 #' Helper function for \code{\link{dtable}}. Returns information about variable
-#' class in an informative way column classes and splits variable names into a
-#' list of two vectors based on numeric/integer or factor class.
+#' class in a \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
 #'
 #' @param data1 a \code{data.frame}
 #' @param vnames a vector of variable names from \code{data1} to classify
 #'
-#' @return Returns a list with a vector containing factor variable names, and a
-#'   vector containing numeric variable names.
+#' @return Returns a data.frame or list with the variable names and their
+#'   respective classes. Returns a data.frame by default.
 #' @seealso \code{\link{class}} to examine method for extracting class type.
 #' @export
 #' @examples
 #' # Load sample data
 #' dclass(iris2)
 #'
-#' # All variables
-#' dclass(iris2, names(iris2))
+#' # Return variable and class data in data.frame
+#' dclass(iris2)
 #'
-#' # Single variable
-#' dclass(iris2, "Species")
-dclass <- function(data1, as.list = TRUE){
+#' # Return variable and class data in list
+#' dclass(iris2, as.list = TRUE)
+dclass <- function(data1, as.list = FALSE){
 
   data1 <- as.data.frame((unlist(sapply(data1, class))))
   data1 <- setNames(data.frame(row.names(data1), data1),
@@ -68,13 +67,13 @@ dclass <- function(data1, as.list = TRUE){
 #'
 dtable <- function (data, vnames = NULL, neat = TRUE, sizesort = TRUE){
 
-  if (is.null(vnames)) vnames <- names(data1)  # Default to all variables
+  if (is.null(vnames)) vnames <- names(data1)  # Default selection  to all variables
 
-  detected <- dclass(data, vnames)
+  detected <- dclass(data, as.list = TRUE)
   dtable <- list()
 
   if(length(detected$f) > 0) {
-    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$f, dfactor,
+    dtable[["factor"]] <- do.call(rbind.data.frame, lapply(detected$factor$variable, dfactor,
                                                            data = data, neat = neat,
                                                            sizesort = sizesort))
     if(neat) {
@@ -87,7 +86,8 @@ dtable <- function (data, vnames = NULL, neat = TRUE, sizesort = TRUE){
   }
 
   if(length(detected$n) > 0) {
-    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$n,dnumeric,
+    detected$numeric$variable
+    dtable[["numeric"]] <- do.call(rbind.data.frame, lapply(detected$numeric$variable,dnumeric,
                                                             data = data, neat = neat,
                                                             sizesort = sizesort))
     dtable[["numeric"]] <- dtable[["numeric"]][, -1]

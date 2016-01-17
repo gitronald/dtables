@@ -4,7 +4,7 @@
 \alias{dtable}
 \title{Generate demographic frequencies and descriptive statistics tables}
 \usage{
-dtable(data, vnames = "", neat = TRUE, sizesort = TRUE)
+dtable(data, vnames = NULL, neat = TRUE, sizesort = TRUE)
 }
 \arguments{
 \item{data}{a \code{data.frame}}

@@ -2,9 +2,9 @@
 % Please edit documentation in R/demotables.R
 \name{dclass}
 \alias{dclass}
-\title{Detect Variable Classes}
+\title{Data.frame of Variables and Classes}
 \usage{
-dclass(data1, vnames)
+dclass(data1, as.list = FALSE)
 }
 \arguments{
 \item{data1}{a \code{data.frame}}
@@ -12,23 +12,22 @@ dclass(data1, vnames)
 \item{vnames}{a vector of variable names from \code{data1} to classify}
 }
 \value{
-Returns a list with a vector containing factor variable names, and a
-  vector containing numeric variable names.
+Returns a data.frame or list with the variable names and their
+  respective classes. Returns a data.frame by default.
 }
 \description{
-Helper function for \code{\link{dtable}}. Obtains column classes and splits
-variable names into a list of two vectors based on numeric/integer or factor
-class.
+Helper function for \code{\link{dtable}}. Returns information about variable
+class in a \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
 }
 \examples{
 # Load sample data
 dclass(iris2)
 
-# All variables
-dclass(iris2, names(iris2))
+# Return variable and class data in data.frame
+dclass(iris2)
 
-# Single variable
-dclass(iris2, "Species")
+# Return variable and class data in list
+dclass(iris2, as.list = TRUE)
 }
 \seealso{
 \code{\link{class}} to examine method for extracting class type.
