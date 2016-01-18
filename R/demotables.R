@@ -1,22 +1,22 @@
-#' Generate demographic frequencies and descriptive statistics tables
+#'Generate demographic frequencies and descriptive statistics tables
 #'
-#' Generate demographic frequencies tables and descriptive statistics tables in
-#' data.frame format for R.
+#'Simplifies the process and reduces the amount of code involved in generating
+#'descriptive frequencies and statistics tables with or without formatting.
 #'
-#' @param data a \code{data.frame}
-#' @param vnames all, or a subset \code{vector} of variable names from
-#'   \code{data.frame}
-#' @param neat logical, defaults to \code{TRUE} and returns rounded factor table
-#'   with percent symbols
-#' @param sizesort logical, returns data sorted by frequency and mean if
-#'   \code{TRUE}
-#' @return List of two \code{data.frames}, split into \code{factor} and
-#'   \code{numeric} variables if \code{vnames} contains both classes, single
-#'   \code{data.frame} returned if only one variable class detected in
-#'   \code{vnames} by \code{dclass}.
-#' @seealso \code{\link{dclass}} to see how class is identified.
-#' @importFrom psych describe
-#' @export
+#'@param data a \code{data.frame}
+#'@param vnames all, or a subset \code{vector} of variable names from
+#'  \code{data.frame}
+#'@param neat logical, defaults to \code{TRUE} and returns rounded factor table
+#'  with percent symbols
+#'@param sizesort logical, returns data sorted by frequency and mean if
+#'  \code{TRUE}
+#'@return List of two \code{data.frames}, split into \code{factor} and
+#'  \code{numeric} variables if \code{vnames} contains both classes, single
+#'  \code{data.frame} returned if only one variable class detected in
+#'  \code{vnames} by \code{dclass}.
+#'@seealso \code{\link{dclass}} to see how class is identified.
+#'@importFrom psych describe
+#'@export
 #' @examples
 #' # Examine all variables
 #' dtable(iris2)
@@ -39,11 +39,11 @@ dtable <- function (data1,
   var.details  <- dvariable(data1, variables)  # Extract variable details
 
   if (is.null(descriptives)) { # Default selection to all variables
-    descriptives <- c("numeric", "integer")           # Obtain names for descriptive statistics
+    descriptives <- c("numeric", "integer")
   }
 
   if (is.null(frequencies)) { # Default selection to all variables
-    frequencies <- c("character", "factor", "integer", "logical") # Obtain names for descriptive frequencies
+    frequencies <- c("character", "factor", "integer", "logical")
   }
 
   frequencies <- unlist(lapply(frequencies, function(x) extract(var.details, "class", x, "variable")))
