@@ -67,10 +67,11 @@ dvariable <- function(data1, vars = NULL){
     variable <- names(data1)
   }
 
-  class <- dclass(data1)[, 2]
-  mode  <- dmode(data1)[, 2]
-  type  <- dtypeof(data1)[, 2]
-  data2 <- data.frame(variable, class, mode, type)
+  class     <- dclass(data1)[, 2]
+  mode      <- dmode(data1)[, 2]
+  type      <- dtypeof(data1)[, 2]
+  responses <- factor_length(data1)[, 2]
+  data2     <- data.frame(variable, class, mode, type, responses)
 
   return(data2)
 }
@@ -78,5 +79,14 @@ dvariable <- function(data1, vars = NULL){
 pull_rownames <- function(data1){
   data1 <- data.frame(row.names(data1), data1)
   row.names(data1) <- NULL
+  return(data1)
+}
+
+factor_length <- function(data1) {
+  variable <- names(data1)
+  data1 <- lapply(variables, function(x) length(levels(as.factor((data1[, x])))))
+  data1 <- data.frame(variable, (unlist(data1)))
+  data1 <- setNames(data1, c("variable", "length"))     # Set column names
+
   return(data1)
 }
