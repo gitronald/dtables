@@ -84,7 +84,7 @@ pull_rownames <- function(data1){
 
 factor_length <- function(data1) {
   variable <- names(data1)
-  data1 <- lapply(variables, function(x) length(levels(as.factor((data1[, x])))))
+  data1 <- lapply(variable, function(x) length(levels(as.factor((data1[, x])))))
   data1 <- data.frame(variable, (unlist(data1)))
   data1 <- setNames(data1, c("variable", "length"))     # Set column names
 
