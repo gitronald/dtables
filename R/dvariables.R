@@ -1,5 +1,50 @@
 #' Data.frame of Variables and Classes
 #'
+#' Helper function for \code{\link{dtable}}. Returns information about each
+#' variable's class, mode, type, and number of response levels in a
+#' \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
+#'
+#' @param data1 a \code{data.frame}
+#' @return Returns a data.frame or list with the variable names and their
+#'   respective classes. Returns a data.frame by default.
+#' @seealso \code{\link{dclass}} to examine method for extracting class.
+#' @seealso \code{\link{dmode}} to examine method for extracting mode.
+#' @seealso \code{\link{dtypeof}} to examine method for extracting type.
+#'
+#' @export
+#' @examples
+#' # Load sample data
+#' dvariable(iris2)
+#'
+#' # Return variable and class data in data.frame
+#' dvariable(iris2)
+#'
+#' # Return variable and class data in list
+#' dvariable(iris2, as.list = TRUE)
+dvariable <- function(data1, vars = NULL){
+  if (!("data.frame" %in% class(data1))) {
+    warning("Input 'data1' should be a data.frame,
+            attempting to coerce input to data.frame")
+    data1 <- as.data.frame(data1)
+  }
+  if (is.null(vars)) {           # Default to all variables
+    variable <- names(data1)
+  } else {
+    data1    <- setNames(data.frame(data1[, vars]), vars)    # Or use a selection
+    variable <- names(data1)
+  }
+
+  class     <- dclass(data1)[, 2]
+  mode      <- dmode(data1)[, 2]
+  type      <- dtypeof(data1)[, 2]
+  responses <- factor_length(data1)[, 2]
+  data2     <- data.frame(variable, class, mode, type, responses)
+
+  return(data2)
+}
+
+#' Data.frame of Variables and Classes
+#'
 #' Helper function for \code{\link{dtable}}. Returns information about variable
 #' class in a \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
 #'
@@ -52,28 +97,6 @@ dtypeof <- function(data1, as.list = FALSE){
   if (as.list) data1 <- split(data1, data1[["typeof"]]) # If, convert to list
 
   return(data1)
-}
-
-dvariable <- function(data1, vars = NULL){
-  if (!("data.frame" %in% class(data1))) {
-    warning("Input 'data1' should be a data.frame,
-            attempting to coerce input to data.frame")
-    data1 <- as.data.frame(data1)
-  }
-  if (is.null(vars)) {           # Default to all variables
-    variable <- names(data1)
-  } else {
-    data1    <- setNames(data.frame(data1[, vars]), vars)    # Or use a selection
-    variable <- names(data1)
-  }
-
-  class     <- dclass(data1)[, 2]
-  mode      <- dmode(data1)[, 2]
-  type      <- dtypeof(data1)[, 2]
-  responses <- factor_length(data1)[, 2]
-  data2     <- data.frame(variable, class, mode, type, responses)
-
-  return(data2)
 }
 
 pull_rownames <- function(data1){
