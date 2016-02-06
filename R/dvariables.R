@@ -40,9 +40,10 @@ dvariable <- function(data1, vars = NULL){
   levels    <- factor_length(data1)[, 2]
   data2     <- data.frame(variable, class, mode, type, levels)
 
+  treatas   <- predict_variable(data2)
+  data3 <- cbind(data2, treatas)
 
-
-  return(data2)
+  return(data3)
 }
 
 
@@ -50,7 +51,7 @@ predict_variable <- function(data1) {
   treatas <- matrix(nrow = nrow(data1), ncol = 2)
   for(i in 1:nrow(data1)){
     treatas[i, 1] <- ifelse(data1[i, "levels"] < 15, 1, 0)
-    treatas[i, 2] <- ifelse(data1[i, "levels"] > 12, 1, 0)
+    treatas[i, 2] <- ifelse(data1[i, "levels"] > 12 & data1[i, "class"] != "factor", 1, 0)
   }
   treatas <- setNames(as.data.frame(treatas),
                       c("frequencies", "statistics"))

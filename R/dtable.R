@@ -48,41 +48,37 @@ dtable <- function (data1,
                     statistics = NULL,
                     neat = TRUE, as.list = FALSE, sizesort = TRUE){
 
+  if(is.null(variables)) variables <- names(data1)
   var.details  <- dvariable(data1, variables)  # Extract variable details
 
-  if (is.null(frequencies)) { # Default selection to all variables
-    frequencies <- c("character", "factor", "integer", "logical")
+  if(is.null(frequencies)) { # Default to dvariable prediction
+    frequencies <- var.details[var.details["frequencies"] == 0, "variable"]
   }
-  if (is.null(statistics)) { # Default selection to all variables
-    statistics <- c("numeric", "integer")
+  if(is.null(statistics)) { # Default to dvariable prediction
+    statistics  <- var.details[var.details["statistics"] == 0, "variable"]
   }
-
-  frequencies <- unlist(lapply(frequencies, function(x) extract(var.details, "class", x, "variable")))
-  statistics <- unlist(lapply(statistics, function(x) extract(var.details, "class", x, "variable")))
 
   dtable <- create_list(c("Frequencies", "Statistics"), 1)
 
   for (i in frequencies){
-    dtable$F <- lapply(frequencies, dfactor,
-                          data = data1, neat = neat,
-                          sizesort = sizesort)
+    dtable$Frequencies <- lapply(frequencies, dfactor,
+                                 data = data1, neat = neat,
+                                 sizesort = sizesort)
   }
 
   for (i in statistics){
-    dtable$S <- lapply(statistics, dnumeric,
-                          data = data1, neat = neat,
-                          sizesort = sizesort)
+    dtable$Statistics <- lapply(statistics, dnumeric,
+                                data = data1, neat = neat,
+                                sizesort = sizesort)
   }
 
   if(!as.list){
-    dtable$F <- do.call(rbind, dtable$Freq)
-    dtable$S <- do.call(rbind, dtable$Statistics)
+    dtable$Frequencies <- do.call(rbind, dtable$Freq)
+    dtable$Statistics <- do.call(rbind, dtable$Statistics)
   }
 
 return(dtable)
 }
-
-# by(pos.nt, pos.nt$GroupNumber, function(x) dfactor(x, "SearchAware")
 
 
 #' Extract and paste from a data.frame
