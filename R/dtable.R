@@ -27,7 +27,7 @@
 #' dtable(iris2)
 #'
 #' #Analyze two or more variables
-#' dtable(iris2, variables = c("Color", "Sold", "LikelyToBuy")
+#' dtable(iris2, variables = c("Color", "Sold", "LikelyToBuy"))
 #'
 #' # Analyze a single variable
 #' dtable(iris2, variables = "Color")
