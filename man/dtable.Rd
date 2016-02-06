@@ -4,11 +4,11 @@
 \alias{dtable}
 \title{Generate demographic frequencies and descriptive statistics tables}
 \usage{
-dtable(data1, variables = NULL, frequencies = NULL, statistics = NULL,
-  neat = TRUE, as.list = FALSE, sizesort = TRUE)
+dtable(data1, variables = NULL, by = NULL, frequencies = NULL,
+  statistics = NULL, neat = TRUE, as.list = FALSE, sizesort = FALSE)
 
-dtable(data1, variables = NULL, frequencies = NULL, statistics = NULL,
-  neat = TRUE, as.list = FALSE, sizesort = TRUE)
+dtable(data1, variables = NULL, by = NULL, frequencies = NULL,
+  statistics = NULL, neat = TRUE, as.list = FALSE, sizesort = FALSE)
 }
 \arguments{
 \item{data1}{a \code{data.frame} or \code{matrix}}
@@ -33,7 +33,7 @@ tables in a list format, split by \code{variables}}
 \item{vnames}{all, or a subset \code{vector} of variable names from
 \code{data.frame}}
 
-\item{neat}{logical, if \code{TRUE} it returns rounded and formatted tables}
+\item{neat}{logical, if \code{TRUE} returns rounded and formatted tables}
 
 \item{sizesort}{logical, if \code{TRUE} returns data sorted by frequency and
 mean}
@@ -86,8 +86,8 @@ dtable(iris2, neat = FALSE)
 # Return list output
 dtable(iris2, as.list = TRUE)
 
-# Not sorted
-dtable(iris2, sizesort = FALSE)
+# Frequencies sorted by size
+dtable(iris2, sizesort = TRUE)
 
 }
 \seealso{
