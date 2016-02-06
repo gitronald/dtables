@@ -52,25 +52,21 @@ dtable <- function (data1,
   var.details  <- dvariable(data1, variables)  # Extract variable details
 
   if(is.null(frequencies)) { # Default to dvariable prediction
-    frequencies <- var.details[var.details["frequencies"] == 0, "variable"]
+    frequencies <- paste(var.details[var.details["frequencies"] == 1, "variable"])
   }
   if(is.null(statistics)) { # Default to dvariable prediction
-    statistics  <- var.details[var.details["statistics"] == 0, "variable"]
+    statistics  <- paste(var.details[var.details["statistics"] == 1, "variable"])
   }
 
   dtable <- create_list(c("Frequencies", "Statistics"), 1)
 
-  for (i in frequencies){
-    dtable$Frequencies <- lapply(frequencies, dfactor,
-                                 data = data1, neat = neat,
-                                 sizesort = sizesort)
-  }
+  dtable$Frequencies <- lapply(frequencies, dfactor,
+                               data = data1, neat = neat,
+                               sizesort = sizesort)
 
-  for (i in statistics){
-    dtable$Statistics <- lapply(statistics, dnumeric,
-                                data = data1, neat = neat,
-                                sizesort = sizesort)
-  }
+  dtable$Statistics <- lapply(statistics, dnumeric,
+                              data = data1, neat = neat,
+                              sizesort = sizesort)
 
   if(!as.list){
     dtable$Frequencies <- do.call(rbind, dtable$Freq)
