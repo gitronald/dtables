@@ -19,11 +19,11 @@ variable's class, mode, type, and number of response levels in a
 \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
 }
 \examples{
-# Load sample data
+# Describe all variables in iris2
 dvariable(iris2)
 
-# Return variable and class data in data.frame
-dvariable(iris2)
+# Describe one or more specific variables in iris2
+dvariable(iris2, vars = "Species")
 
 # Return variable and class data in list
 dvariable(iris2, as.list = TRUE)
