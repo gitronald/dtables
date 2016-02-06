@@ -38,15 +38,15 @@
 #' # Return list output
 #' dtable(iris2, as.list = TRUE)
 #'
-#' # Not sorted
-#' dtable(iris2, sizesort = FALSE)
+#' # Frequencies sorted by size
+#' dtable(iris2, sizesort = TRUE)
 #'
 dtable <- function (data1,
                     variables = NULL,
                     by = NULL,
                     frequencies = NULL,
                     statistics = NULL,
-                    neat = TRUE, as.list = FALSE, sizesort = TRUE){
+                    neat = TRUE, as.list = FALSE, sizesort = FALSE){
 
   if(is.null(variables)) variables <- names(data1)
   var.details  <- dvariable(data1, variables)  # Extract variable details
