@@ -4,11 +4,11 @@
 \alias{dtable}
 \title{Generate demographic frequencies and descriptive statistics tables}
 \usage{
-dtable(data1, variables = NULL, by = NULL, frequencies = NULL,
-  statistics = NULL, neat = TRUE, as.list = FALSE, sizesort = FALSE)
+dtable(data1, variables = NULL, frequencies = NULL, statistics = NULL,
+  neat = TRUE, as.list = FALSE, sizesort = FALSE)
 
-dtable(data1, variables = NULL, by = NULL, frequencies = NULL,
-  statistics = NULL, neat = TRUE, as.list = FALSE, sizesort = FALSE)
+dtable(data1, variables = NULL, frequencies = NULL, statistics = NULL,
+  neat = TRUE, as.list = FALSE, sizesort = FALSE)
 }
 \arguments{
 \item{data1}{a \code{data.frame} or \code{matrix}}

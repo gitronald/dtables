@@ -43,7 +43,6 @@
 #'
 dtable <- function (data1,
                     variables = NULL,
-                    by = NULL,
                     frequencies = NULL,
                     statistics = NULL,
                     neat = TRUE, as.list = FALSE, sizesort = FALSE){

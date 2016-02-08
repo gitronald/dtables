@@ -12,7 +12,7 @@
 #'   symbols
 #' @param sizesort logical, \code{TRUE} returns table sorted by size
 #' @return Returns a demographic frequency table of varying specificity.
-#' @seealso \link{\code{table}} which this function utilizes.
+#' @seealso \code{\link{table}} which this function utilizes.
 #' @export
 #' @examples
 #' # Single demographic

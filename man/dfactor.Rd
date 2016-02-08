@@ -60,6 +60,6 @@ dfactor(iris2, c("Color", "Species"))
 \seealso{
 \link{\code{table}} which this function utilizes.
 
-\link{\code{table}} which this function utilizes.
+\code{\link{table}} which this function utilizes.
 }
 
