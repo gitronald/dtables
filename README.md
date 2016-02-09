@@ -1,4 +1,4 @@
-# demotables
+# dtables
 
 * Simplifies the process and reduces the amount of code involved in generating   
   descriptive frequencies and statistics tables with or without formatting.

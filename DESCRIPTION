@@ -1,4 +1,4 @@
-Package: demotables
+Package: dtables
 Title: Tools For Creating Basic Demographic Tables
 Version: 0.0.1
 Authors@R: person("Ronald", "Robertson", email = "rrobertson@aibrt.org", role = c("aut", "cre"))
@@ -10,7 +10,7 @@ Description: Functions that reduce the time and amount of code required to creat
     describe function from the psych package.
 Depends:
     R (>= 3.2.2)
-License: GPL-3 
+License: GPL-3
 LazyData: true
 RoxygenNote: 5.0.1
 Imports:
