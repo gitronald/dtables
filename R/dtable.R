@@ -72,6 +72,9 @@ dtable <- function (data1,
     dtable$Statistics <- do.call(rbind, dtable$Statistics)
   }
 
+  dtable$Frequencies$Dataset <- gsub("data1", deparse(substitute(data1)), dtable$Frequencies$Dataset)
+  dtable$Statistics$dataset <- gsub("data1", deparse(substitute(data1)), dtable$Statistics$dataset)
+
 return(dtable)
 }
 
