@@ -50,10 +50,10 @@ dvariable <- function(data1, vars = NULL){
 predict_variable <- function(data1) {
   treatas <- matrix(nrow = nrow(data1), ncol = 2)
   for(i in 1:nrow(data1)){
-    treatas[i, 1] <- ifelse(data1[i, "levels"] < 15, 1, 0)
-    treatas[i, 2] <- ifelse(data1[i, "levels"] > 12 & data1[i, "class"] %in% c("numeric", "integer"), 1, 0)
+    treatas[i, 1] <- ifelse(data1[i, "levels"] < 15 & data1[i, "levels"] > 0, 1, 0)
+    treatas[i, 2] <- ifelse(data1[i, "class"] %in% c("numeric", "integer"), 1, 0)
     if(sum(treatas[i, 1:2]) == 0) {
-      warning("Variable '", data1[i, "variable"], "' was not classified. Force with name in frequencies or statistics arguments")
+      message("Note: '", data1[i, "variable"], "' was not classified. Force with name in frequencies or statistics arguments")
     }
   }
 
