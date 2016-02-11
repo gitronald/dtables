@@ -10,6 +10,7 @@
 #' @param date logical, if \code{TRUE} appends the object name with todays date
 #' @return Returns nothing. Saves "object_date.tsv" or "object.tsv" to current
 #'   directory.
+#' @importFrom utils write.table
 #' @export
 #' @examples
 #' write_object(iris2)
