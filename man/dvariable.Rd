@@ -4,10 +4,14 @@
 \alias{dvariable}
 \title{Data.frame of Variables and Classes}
 \usage{
-dvariable(data1, vars = NULL)
+dvariable(data1, vars = NULL, as.list = FALSE)
 }
 \arguments{
 \item{data1}{a \code{data.frame}}
+
+\item{vars}{specify one or more variable names with a character vector}
+
+\item{as.list}{logical, \code{TRUE} returns a list split by class}
 }
 \value{
 Returns a data.frame or list with the variable names and their

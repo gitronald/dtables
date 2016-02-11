@@ -8,6 +8,8 @@ dclass(data1, as.list = FALSE)
 }
 \arguments{
 \item{data1}{a \code{data.frame}}
+
+\item{as.list}{logical, \code{TRUE} returns a list split by class}
 }
 \value{
 Returns a data.frame or list with the variable names and their

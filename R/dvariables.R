@@ -5,6 +5,8 @@
 #' \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
 #'
 #' @param data1 a \code{data.frame}
+#' @param vars specify one or more variable names with a character vector
+#' @param as.list logical, \code{TRUE} returns a list split by class
 #' @return Returns a data.frame or list with the variable names and their
 #'   respective classes. Returns a data.frame by default.
 #' @seealso \code{\link{class}} to examine method for extracting class.
@@ -70,6 +72,7 @@ predict_variable <- function(data1) {
 #' class in a \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
 #'
 #' @param data1 a \code{data.frame}
+#' @param as.list logical, \code{TRUE} returns a list split by class
 #' @return Returns a data.frame or list with the variable names and their
 #'   respective classes. Returns a data.frame by default.
 #' @seealso \code{\link{class}} to examine method for extracting class.
