@@ -4,7 +4,7 @@
 #' frequencies table formatted in standard presentation structure with percent
 #' symbols.
 #'
-#' @param data a \code{data.frame}
+#' @param data1 a \code{data.frame}
 #' @param vnames a vector of variable names from \code{data.frame} to use in
 #'   creation of demographic frequency table, multiple variables produces more
 #'   specific groups.
