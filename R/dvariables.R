@@ -12,6 +12,7 @@
 #' @seealso \code{\link{class}} to examine method for extracting class.
 #' @seealso \code{\link{mode}} to examine method for extracting mode.
 #' @seealso \code{\link{typeof}} to examine method for extracting type.
+#' @importFrom stats setNames
 #'
 #' @export
 #' @examples
@@ -66,26 +67,7 @@ predict_variable <- function(data1) {
   return(treatas)
 }
 
-#' Data.frame of Variables and Classes
-#'
-#' Helper function for \code{\link{dtable}}. Returns information about variable
-#' class in a \code{data.frame}, or \code{list} if \code{as.list = TRUE}.
-#'
-#' @param data1 a \code{data.frame}
-#' @param as.list logical, \code{TRUE} returns a list split by class
-#' @return Returns a data.frame or list with the variable names and their
-#'   respective classes. Returns a data.frame by default.
-#' @seealso \code{\link{class}} to examine method for extracting class.
-#' @export
-#' @examples
-#' # Load sample data
-#' dclass(iris2)
-#'
-#' # Return variable and class data in data.frame
-#' dclass(iris2)
-#'
-#' # Return variable and class data in list
-#' dclass(iris2, as.list = TRUE)
+
 dclass <- function(data1, as.list = FALSE){
   data2 <- lapply(data1, function(x) class(x))          # Collect data
   data2 <- list_collapse(data2)                         # Concatenate extra names
