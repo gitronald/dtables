@@ -47,10 +47,10 @@ $Statistics
   
 ### Options
 
-* Create Raw Output: `dtable(iris2, neat = FALSE)`
+* Create raw Output: `dtable(iris2, neat = FALSE)`
 
-* Create List Outputs: `dtable(iris2, as.list = T)`
+* Create list Outputs: `dtable(iris2, as.list = T)`
 
 * Select variables: `dtable(iris2, variables = c("Species", "Sold", "Sepal.Length"))`
 
-* Specify variable descriptives: `dtable(iris2, frequencies = "Species", statistics = "LikelyToBuy")`
+* Specify frequencies and statistics tables: `dtable(iris2, frequencies = "Species", statistics = "LikelyToBuy")`
