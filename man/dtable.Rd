@@ -47,7 +47,7 @@ List of two \code{data.frames}, split into \code{factor} and
 Returns descriptive frequencies and statistics tables for all
   variables in \code{data1} by default. Predicts whether to create a
   frequencies table, statistics table, or both for each varible based on
-  information gathered using \link{\code{dvariable}}.
+  information gathered using \code{dvariable}.
 }
 \description{
 Simplifies the process and reduces the amount of code involved in generating

@@ -1,6 +1,6 @@
 #' Write an object to a file
 #'
-#' A wrapper for \link{\code{write.table}} that saves an object by name to a tab
+#' A wrapper for \code{write.table} that saves an object by name to a tab
 #' delimited (.tsv) file with options to specify directory and include the
 #' current date in the file name.
 #'

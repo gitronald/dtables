@@ -12,7 +12,6 @@
 #'   symbols
 #' @param sizesort logical, \code{TRUE} returns table sorted by size
 #' @return Returns a demographic frequency table of varying specificity.
-#' @seealso \code{\link{table}} which this function utilizes.
 #' @export
 #' @examples
 #' # Single demographic
@@ -33,7 +32,7 @@ dfactor <- function (data1, vnames, neat = TRUE, sizesort = TRUE) {
   dgroup <- data.frame(dgroup)
 
   # Fourth column - Percent value of frequency count
-  dgroup <- transform(dgroup, Prop = prop.table(Freq))
+  dgroup <- transform(dgroup, Prop = prop.table(dgroup[, "Freq"]))
 
   # Make table neat by rounding and removing repetitive labels
   if (neat) {

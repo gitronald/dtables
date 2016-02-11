@@ -18,7 +18,7 @@
 #' @return Returns descriptive frequencies and statistics tables for all
 #'   variables in \code{data1} by default. Predicts whether to create a
 #'   frequencies table, statistics table, or both for each varible based on
-#'   information gathered using \link{\code{dvariable}}.
+#'   information gathered using \code{dvariable}.
 #'
 #' @export
 #'
