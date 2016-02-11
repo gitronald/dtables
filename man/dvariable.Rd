@@ -29,10 +29,10 @@ dvariable(iris2, vars = "Species")
 dvariable(iris2, as.list = TRUE)
 }
 \seealso{
-\code{\link{dclass}} to examine method for extracting class.
+\code{\link{class}} to examine method for extracting class.
 
-\code{\link{dmode}} to examine method for extracting mode.
+\code{\link{mode}} to examine method for extracting mode.
 
-\code{\link{dtypeof}} to examine method for extracting type.
+\code{\link{typeof}} to examine method for extracting type.
 }
 

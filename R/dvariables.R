@@ -7,9 +7,9 @@
 #' @param data1 a \code{data.frame}
 #' @return Returns a data.frame or list with the variable names and their
 #'   respective classes. Returns a data.frame by default.
-#' @seealso \code{\link{dclass}} to examine method for extracting class.
-#' @seealso \code{\link{dmode}} to examine method for extracting mode.
-#' @seealso \code{\link{dtypeof}} to examine method for extracting type.
+#' @seealso \code{\link{class}} to examine method for extracting class.
+#' @seealso \code{\link{mode}} to examine method for extracting mode.
+#' @seealso \code{\link{typeof}} to examine method for extracting type.
 #'
 #' @export
 #' @examples
@@ -21,7 +21,7 @@
 #'
 #' # Return variable and class data in list
 #' dvariable(iris2, as.list = TRUE)
-dvariable <- function(data1, vars = NULL){
+dvariable <- function(data1, vars = NULL, as.list = FALSE){
   if (!("data.frame" %in% class(data1))) {
     warning("Input 'data1' should be a data.frame,
             attempting to coerce input to data.frame")
@@ -42,6 +42,8 @@ dvariable <- function(data1, vars = NULL){
 
   treatas   <- predict_variable(data2)
   data3 <- cbind(data2, treatas)
+
+  if (as.list) data3 <- split(data3, data3[["class"]])  # If, convert to list
 
   return(data3)
 }
