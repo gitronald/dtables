@@ -19,10 +19,11 @@
 dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
 
   # First column - Name the demographic from object name
-  Dataset <- rep(deparse(substitute(data1)), length(table(data1[, vars])))
-  Demographic <- vector(length = length(table(data1[, vars])))
-  DemoName    <- paste0(vars)
-  Demographic <- rep(DemoName, length(table(data1[vars])))
+  n           <- length(table(data1[, vars]))
+  Dataset     <- rep(deparse(substitute(data1)), n)
+  Demographic <- vector(length = n)
+  name        <- paste0(vars)
+  Demographic <- rep(name, n)
 
   # Second & Third columns - Demographic factors and frequency counts
   dgroup <- table(data1[, vars])
@@ -43,8 +44,8 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
 
     # If only one variable, remove repetitive demographic IDs (presentation format)
     if (length(vars) == 1) {
-      Dataset <- c(Dataset[1], rep("", (length(table(data1[, vars])) - 1)))
-      Demographic <- c(DemoName, rep("", (length(table(data1[, vars])) - 1)))
+      Dataset <- c(Dataset[1], rep("", (n - 1)))
+      Demographic <- c(name, rep("", (n - 1)))
     }
   }
 
