@@ -5,11 +5,10 @@
 #' symbols.
 #'
 #' @param data1 a \code{data.frame}
-#' @param vnames a vector of one or more variable names in \code{data1}
-#' @param neat logical, \code{TRUE} returns rounded factor table with percent
-#'   symbols
+#' @param vars a vector of one or more variable names in \code{data1}
+#' @param neat logical, \code{TRUE} returns a rounded table with percent symbols
 #' @param sizesort logical, \code{TRUE} returns table sorted by size
-#' @return Returns a demographic frequency table of varying specificity.
+#' @return Returns a demographic frequencies table in \code{data.frame} format.
 #' @export
 #' @examples
 #' # Single demographic
@@ -17,16 +16,16 @@
 #'
 #' # Two demographics
 #' dfactor(iris2, c("Color", "Species"))
-dfactor <- function (data1, vnames, neat = TRUE, sizesort = TRUE) {
+dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
 
   # First column - Name the demographic from object name
-  Dataset <- rep(deparse(substitute(data1)), length(table(data1[, vnames])))
-  Demographic <- vector(mode = "logical", length(table(data1[, vnames])))
-  DemoName    <- paste0(vnames)
-  Demographic <- rep(DemoName, length(table(data1[vnames])))
+  Dataset <- rep(deparse(substitute(data1)), length(table(data1[, vars])))
+  Demographic <- vector(length = length(table(data1[, vars])))
+  DemoName    <- paste0(vars)
+  Demographic <- rep(DemoName, length(table(data1[vars])))
 
   # Second & Third columns - Demographic factors and frequency counts
-  dgroup <- table(data1[, vnames])
+  dgroup <- table(data1[, vars])
   dgroup <- data.frame(dgroup)
 
   # Fourth column - Percent value of frequency count
@@ -43,17 +42,17 @@ dfactor <- function (data1, vnames, neat = TRUE, sizesort = TRUE) {
     dgroup[, "Perc"] <- gsub("$", "%", dgroup[, "Perc"])
 
     # If only one variable, remove repetitive demographic IDs (presentation format)
-    if (length(vnames) == 1) {
-      Dataset <- c(Dataset[1], rep("", (length(table(data1[, vnames])) - 1)))
-      Demographic <- c(DemoName, rep("", (length(table(data1[, vnames])) - 1)))
+    if (length(vars) == 1) {
+      Dataset <- c(Dataset[1], rep("", (length(table(data1[, vars])) - 1)))
+      Demographic <- c(DemoName, rep("", (length(table(data1[, vars])) - 1)))
     }
   }
 
   # Rename demographic group variable and demographic ID if more than 1 used
-  if (length(vnames) == 1) {
+  if (length(vars) == 1) {
     names(dgroup)[1] <- "Group"
   } else {
-    Demographic <- paste(vnames, collapse = ".")
+    Demographic <- paste(vars, collapse = ".")
   }
 
   # Sort by Freq
