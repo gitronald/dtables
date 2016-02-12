@@ -5,9 +5,7 @@
 #' symbols.
 #'
 #' @param data1 a \code{data.frame}
-#' @param vnames a vector of variable names from \code{data.frame} to use in
-#'   creation of demographic frequency table, multiple variables produces more
-#'   specific groups.
+#' @param vnames a vector of one or more variable names in \code{data1}
 #' @param neat logical, \code{TRUE} returns rounded factor table with percent
 #'   symbols
 #' @param sizesort logical, \code{TRUE} returns table sorted by size
