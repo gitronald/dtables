@@ -47,9 +47,9 @@ $Statistics
   
 ### Options
 
-* Create raw Output: `dtable(iris2, neat = FALSE)`
+* Create raw output: `dtable(iris2, neat = FALSE)`
 
-* Create list Outputs: `dtable(iris2, as.list = T)`
+* Create list outputs: `dtable(iris2, as.list = T)`
 
 * Select variables: `dtable(iris2, variables = c("Species", "Sold", "Sepal.Length"))`
 
