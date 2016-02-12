@@ -1,13 +1,9 @@
 Package: dtables
-Title: Tools for Creating Basic Demographic Tables
-Version: 0.0.1
+Title: Simplifying Descriptive Tables
+Version: 0.0.2
 Authors@R: person(c("Ronald", "E."), "Robertson",, "rrobertson@aibrt.org", c("cre", "aut"))
-Description: Functions that reduce the time and amount of code required to create basic
-    demographic frequencies tables. The dtable function handles both factor variables,
-    returning a table with the N and relative % reported for each factor, and numeric
-    variables, returning a table with basic descriptive statistics such as mean, median,
-    standard deviation, etc. for each variable. Descriptive stats for numeric variables
-    depends on the describe function from the psych package.
+Description: Simplifies the production and formatting of descriptive frequencies and
+    statistics tables.
 Depends:
     R (>= 3.2.2)
 License: GPL-3
