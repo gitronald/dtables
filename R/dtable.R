@@ -79,20 +79,3 @@ dtable <- function (data1,
 
 return(dtable)
 }
-
-
-#' Extract and paste from a data.frame
-#'
-#' @param data1 a \code{data.frame}
-#' @param selectCol select a column
-#' @param selectRows select value in that column
-#' @param column select column to extract
-#'
-#' @return String vector with selected values
-extract <- function(data1, selectCol = NULL, selectRows = NULL, column = NULL) {
-  if (sum(sapply(c(selectCol, selectRows, column), length)) > 0) {
-    data1 <- paste(data1[data1[selectCol] == selectRows, paste(column)])
-  }
-
-  return(data1)
-}
