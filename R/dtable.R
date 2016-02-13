@@ -68,7 +68,7 @@ dtable <- function (data1,
                               sizesort = sizesort)
 
   if(!as.list){
-    dtable$Frequencies <- do.call(rbind, dtable$Freq)
+    dtable$Frequencies <- do.call(rbind, dtable$Frequencies)
     dtable$Statistics <- do.call(rbind, dtable$Statistics)
   }
 
