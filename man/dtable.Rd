@@ -32,9 +32,9 @@ Returns descriptive frequencies and statistics tables for all
 }
 \description{
 Simplifies the process and reduces the amount of code involved in generating
-descriptive frequencies and statistics tables. Output can be generated with
-or without formatting and rounding, and either split into lists by variable,
-or aggregated into two data.frames.
+descriptive frequencies and statistics tables by taking your entire dataset
+as input and generating the tables it predicts you would need given various
+variable aspects such as class.
 }
 \examples{
 # Analyze all data

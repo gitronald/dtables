@@ -4,22 +4,19 @@
 \alias{dfactor}
 \title{Demographic Factor Frequencies Tables}
 \usage{
-dfactor(data1, vnames, neat = TRUE, sizesort = TRUE)
+dfactor(data1, vars, neat = TRUE, sizesort = TRUE)
 }
 \arguments{
 \item{data1}{a \code{data.frame}}
 
-\item{vnames}{a vector of variable names from \code{data.frame} to use in
-creation of demographic frequency table, multiple variables produces more
-specific groups.}
+\item{vars}{a vector of one or more variable names in \code{data1}}
 
-\item{neat}{logical, \code{TRUE} returns rounded factor table with percent
-symbols}
+\item{neat}{logical, \code{TRUE} returns a rounded table with percent symbols}
 
 \item{sizesort}{logical, \code{TRUE} returns table sorted by size}
 }
 \value{
-Returns a demographic frequency table of varying specificity.
+Returns a demographic frequencies table in \code{data.frame} format.
 }
 \description{
 This function converts a column(s) from a \code{data.frame} into a
