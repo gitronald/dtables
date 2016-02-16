@@ -18,31 +18,31 @@
 #' dfactor(iris2, c("Color", "Species"))
 dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
 
-  # First column - Name the demographic from object name
-  n           <- length(table(data1[, vars]))
-  Dataset     <- rep(deparse(substitute(data1)), n)
-  Demographic <- vector(length = n)
-  name        <- paste0(vars)
-  Demographic <- rep(name, n)
+  n           <- length(table(data1[, vars]))        # Obtain levels length
+  Dataset     <- rep(deparse(substitute(data1)), n)  # Replicate object name n times
+  Demographic <- rep(vars, n)                        # Replicate variable name(s)
 
-  dgroup <- data_frame_table(data1[, vars])
+  if(neat){
+    dft <- data_frame_table(data1[, vars], prop = FALSE, perc = TRUE)
+  } else{
+    dft <- data_frame_table(data1[, vars], prop = TRUE, perc = TRUE)
+  }
 
-  # Rename demographic group variable and demographic ID if more than 1 used
   if (length(vars) == 1) {
-    names(dgroup)[1] <- "Group"
+    names(dft)[1] <- "Group"
   } else {
     Demographic <- paste(vars, collapse = ".")
   }
 
   # Sort by Freq
   if (sizesort) {
-    dgroup <- dgroup[order(dgroup[, "Freq"], decreasing = TRUE), ]
+    dft <- dft[order(dft[, "Freq"], decreasing = TRUE), ]
   }
 
-  dgroup <- cbind(Dataset, Demographic, dgroup)
-  rownames(dgroup) <- NULL
+  dft <- cbind(Dataset, Demographic, dft)
+  rownames(dft) <- NULL
 
-  return(dgroup)
+  return(dft)
 }
 
 
