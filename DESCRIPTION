@@ -1,6 +1,6 @@
 Package: dtables
 Title: Simplifying Descriptive Tables
-Version: 0.0.2.9000
+Version: 0.0.3.9000
 Authors@R: person(c("Ronald", "E."), "Robertson",, "rrobertson@aibrt.org", c("cre", "aut"))
 Description: Simplifies the production and formatting of descriptive frequencies and
     statistics tables.
