@@ -16,15 +16,19 @@
 #' write_object(iris2)
 #'
 write_object <- function(object, dir = NULL, date = TRUE) {
-  if(date) date <- Sys.Date()
+  if(date){
+    date <- paste0("_", Sys.Date())
+  } else {
+    date <- ""
+  }
   object <- deparse(substitute(object))
   if(!is.null(dir)) {
-    file.name <- paste0(dir, "/", object, "_", date, ".tsv")
-    if(file.name %in% list.files(dir)) {
+    file.name <- paste0(dir, "/", object, date, ".tsv")
+    if(file.name %in% list.files(recursive = T)) {
       stop(paste0("File '", file.name, "' already exists"))
     }
   } else {
-    file.name <- paste0(object, "_", date, ".tsv")
+    file.name <- paste0(object, date, ".tsv")
     if(file.name %in% list.files()) {
       stop(paste0("File '", file.name, "' already exists"))
     }
