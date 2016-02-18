@@ -19,19 +19,28 @@
 dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
 
   n           <- length(table(data1[, vars]))        # Obtain levels length
-  Dataset     <- rep(deparse(substitute(data1)), n)  # Replicate object name n times
-  Demographic <- rep(vars, n)                        # Replicate variable name(s)
+  dataset     <- rep(deparse(substitute(data1)), n)  # Replicate object name n times
+
+
+  if (length(vars) > 1) {
+    demographic <- paste(vars, collapse = ".")
+  }
 
   if(neat){
     dft <- data_frame_table(data1[, vars], prop = FALSE, perc = TRUE)
+    # If only one variable, remove repetitive demographic IDs (presentation format)
+    dataset <- c(dataset[1], rep("", (n - 1)))
+    demographic <- c(paste(vars, collapse = "."), rep("", (n - 1)))
   } else{
     dft <- data_frame_table(data1[, vars], prop = TRUE, perc = TRUE)
+    demographic <- rep(vars, n)
+    if (length(vars) > 1) {
+      demographic <- paste(vars, collapse = ".")
+    }
   }
 
   if (length(vars) == 1) {
     names(dft)[1] <- "Group"
-  } else {
-    Demographic <- paste(vars, collapse = ".")
   }
 
   # Sort by Freq
@@ -39,7 +48,7 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
     dft <- dft[order(dft[, "Freq"], decreasing = TRUE), ]
   }
 
-  dft <- cbind(Dataset, Demographic, dft)
+  dft <- cbind(dataset, demographic, dft)
   rownames(dft) <- NULL
 
   return(dft)
