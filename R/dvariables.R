@@ -105,6 +105,8 @@ dtypeof <- function(data1, as.list = FALSE){
   return(data1)
 }
 
+#' @export
+#'
 factor_length <- function(data1) {
   variable <- names(data1)
   data1 <- lapply(variable, function(x) length(levels(as.factor((data1[, x])))))
