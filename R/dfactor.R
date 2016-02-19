@@ -22,9 +22,11 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
   dataset     <- rep(deparse(substitute(data1)), n)  # Replicate object name n times
 
 
-  if (length(vars) > 1) {
-    demographic <- paste(vars, collapse = ".")
-  }
+#   if (length(vars) > 1) {
+#     demographic <- paste(vars, collapse = ".")
+#   } else if (length(vars) == 1) {
+#     names(dft)[1] <- "Group"
+#   }
 
   if(neat){
     dft <- data_frame_table(data1[, vars], prop = FALSE, perc = TRUE)
@@ -33,12 +35,13 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
     demographic <- c(paste(vars, collapse = "."), rep("", (n - 1)))
   } else{
     dft <- data_frame_table(data1[, vars], prop = TRUE, perc = TRUE)
-    demographic <- rep(vars, n)
     if (length(vars) > 1) {
       demographic <- paste(vars, collapse = ".")
+      demographic <- rep(demographic, n)
+    } else {
+      demographic <- rep(vars, n)
     }
   }
-
   if (length(vars) == 1) {
     names(dft)[1] <- "Group"
   }
