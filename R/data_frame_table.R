@@ -14,8 +14,8 @@
 data_frame_table <- function(data1, prop = TRUE, perc = TRUE){
   t    <- table(data1)
   dft  <- data.frame(t)
-  vars <- c("group", "n")
-
+  if(ncol(dft) == 2) names(dft) <- c("group", "n")
+  # print(length(dimnames(table(data1))))
   expr  <- named_vector_data_frame(match.call())
   args  <- named_vector_data_frame(formals())
   calls <- rbind(expr, args[which(!args[, "names"] %in% expr[, "names"]), ])
@@ -28,7 +28,7 @@ data_frame_table <- function(data1, prop = TRUE, perc = TRUE){
     perc <- table_perc(t)
     dft <- data.frame(dft, perc)
   }
-
+  names
   return(dft)
 }
 
