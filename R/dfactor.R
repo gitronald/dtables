@@ -18,30 +18,20 @@
 #' dfactor(iris2, c("Color", "Species"))
 dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
 
-  n           <- length(table(data1[, vars]))        # Obtain levels length
-  dataset     <- rep(deparse(substitute(data1)), n)  # Replicate object name n times
+  n           <- length(table(data1[, vars])) # Obtain levels length
+  dataname    <- deparse(substitute(data1))   # Obtain data object name
+  dataset     <- neatify(dataname, n, neat)   # Replicate object name n times or neatly
+  demographic <- neatify(vars, n, neat)       # Replicate demographic name n times or neatly
 
   if(neat){
     dft <- data_frame_table(data1[, vars], prop = FALSE, perc = TRUE)
-    # If only one variable, remove repetitive demographic IDs (presentation format)
-    dataset <- c(dataset[1], rep("", (n - 1)))
-    demographic <- c(paste(vars, collapse = "."), rep("", (n - 1)))
-  } else{
+  } else {
     dft <- data_frame_table(data1[, vars], prop = TRUE, perc = TRUE)
-    if (length(vars) > 1) {
-      demographic <- paste(vars, collapse = ".")
-      demographic <- rep(demographic, n)
-    } else {
-      demographic <- rep(vars, n)
-    }
-  }
-  if (length(vars) == 1) {
-    names(dft)[1] <- "Group"
   }
 
   # Sort by Freq
   if (sizesort) {
-    dft <- dft[order(dft[, "Freq"], decreasing = TRUE), ]
+    dft <- dft[order(dft[, "n"], decreasing = TRUE), ]
   }
 
   dft <- cbind(dataset, demographic, dft)
@@ -50,6 +40,15 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
   return(dft)
 }
 
+neatify <- function(vars, n, neat = T){
+  if(length(vars) > 1) {
+    vars <- paste(vars, collapse = ".")
+  }
+  if(neat) {
+    new <- c(vars, rep("", (n - 1)))
+  } else {
+    new <- rep(vars, n)
+  }
 
-
-
+  return(new)
+}
