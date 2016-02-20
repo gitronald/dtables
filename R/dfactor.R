@@ -21,13 +21,6 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
   n           <- length(table(data1[, vars]))        # Obtain levels length
   dataset     <- rep(deparse(substitute(data1)), n)  # Replicate object name n times
 
-
-#   if (length(vars) > 1) {
-#     demographic <- paste(vars, collapse = ".")
-#   } else if (length(vars) == 1) {
-#     names(dft)[1] <- "Group"
-#   }
-
   if(neat){
     dft <- data_frame_table(data1[, vars], prop = FALSE, perc = TRUE)
     # If only one variable, remove repetitive demographic IDs (presentation format)
