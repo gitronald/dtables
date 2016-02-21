@@ -40,7 +40,7 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
   return(dft)
 }
 
-neatify <- function(vars, n, neat = T){
+neatify <- function(vars, n, neat = TRUE){
   if(length(vars) > 1) {
     vars <- paste(vars, collapse = ".")
   }
@@ -52,3 +52,4 @@ neatify <- function(vars, n, neat = T){
 
   return(new)
 }
+

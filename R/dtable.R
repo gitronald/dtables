@@ -60,7 +60,7 @@ dtable <- function (data1,
   dtable <- create_list(c("Frequencies", "Statistics"), 1)
 
   dtable$Frequencies <- lapply(frequencies, dfactor,
-                               data = data1, neat = neat,
+                               data1 = data1, neat = neat,
                                sizesort = sizesort)
 
   dtable$Statistics <- lapply(statistics, dnumeric,
@@ -72,10 +72,14 @@ dtable <- function (data1,
     dtable$Statistics <- do.call(rbind, dtable$Statistics)
   }
 
-  dtable$Frequencies$Dataset <- gsub("data1", deparse(substitute(data1)),
-                                     dtable$Frequencies$Dataset)
-  dtable$Statistics$dataset <- gsub("data1", deparse(substitute(data1)),
-                                    dtable$Statistics$dataset)
+  if(!is.null(dtable$Frequencies)) {
+    dtable$Frequencies$dataset <- gsub("data1", deparse(substitute(data1)),
+                                       dtable$Frequencies$dataset)
+  }
+  if(!is.null(dtable$Statistics)) {
+    dtable$Statistics$dataset <- gsub("data1", deparse(substitute(data1)),
+                                      dtable$Statistics$dataset)
+  }
 
 return(dtable)
 }
