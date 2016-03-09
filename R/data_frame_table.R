@@ -7,7 +7,7 @@
 #' @param prop logical, if \code{TRUE} returns an additional proportion column
 #' @param perc logical, if \code{TRUE} returns an additional percentage column
 #'
-#' @return a data.frame table with an optional proportion column
+#' @return a data.frame table with optional proportion and percentage columns
 #' @export
 #'
 #' @examples

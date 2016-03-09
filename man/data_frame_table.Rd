@@ -14,7 +14,7 @@ data_frame_table(data1, prop = TRUE, perc = TRUE)
 \item{perc}{logical, if \code{TRUE} returns an additional percentage column}
 }
 \value{
-a data.frame table with an optional proportion column
+a data.frame table with optional proportion and percentage columns
 }
 \description{
 Create a table with a data.frame structure and optional proportion and
