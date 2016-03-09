@@ -10,12 +10,15 @@ data_frame_table(data1, prop = TRUE, perc = TRUE)
 \item{data1}{a vector or data.frame column}
 
 \item{prop}{logical, if \code{TRUE} returns an additional proportion column}
+
+\item{perc}{logical, if \code{TRUE} returns an additional percentage column}
 }
 \value{
 a data.frame table with an optional proportion column
 }
 \description{
-Create a data.frame table with an optional proportion column
+Create a table with a data.frame structure and optional proportion and
+percentage columns
 }
 \examples{
 data_frame_table(iris2$Species)

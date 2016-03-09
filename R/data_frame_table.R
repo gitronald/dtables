@@ -1,9 +1,11 @@
 #' Create a data.frame table
 #'
-#' Create a data.frame table with an optional proportion column
+#' Create a table with a data.frame structure and optional proportion and
+#' percentage columns
 #'
 #' @param data1 a vector or data.frame column
 #' @param prop logical, if \code{TRUE} returns an additional proportion column
+#' @param perc logical, if \code{TRUE} returns an additional percentage column
 #'
 #' @return a data.frame table with an optional proportion column
 #' @export
