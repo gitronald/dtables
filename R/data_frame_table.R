@@ -14,7 +14,12 @@
 data_frame_table <- function(data1, prop = TRUE, perc = TRUE){
   t    <- table(data1)
   dft  <- data.frame(t)
-  if(ncol(dft) == 2) names(dft) <- c("group", "n")
+
+  if(ncol(dft) == 2) {
+    names(dft) <- c("group", "n")
+  } else if(ncol(dft) > 2){
+    names(dft)[3] <- "n"
+  }
 
   if(prop) {
     prop <- table_prop(t)
