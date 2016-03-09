@@ -105,8 +105,16 @@ dtypeof <- function(data1, as.list = FALSE){
   return(data1)
 }
 
+
+#' Return factor level lengths for all variables in a data.frame
+#'
+#' @param data1 a \code{data.frame}
+#'
+#' @return a \code{data.frame} with variable names and factor level lengths
 #' @export
 #'
+#' @examples
+#' factor_length(iris2)
 factor_length <- function(data1) {
   variable <- names(data1)
   data1 <- lapply(variable, function(x) length(levels(as.factor((data1[, x])))))
