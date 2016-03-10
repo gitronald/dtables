@@ -1,9 +1,8 @@
 Package: dtables
-Title: Simplifying Descriptives Tables
-Version: 0.0.3.9000
+Title: Descriptive Frequencies and Statistics Data.Frame Tables
+Version: 0.0.3
 Authors@R: person(c("Ronald", "E."), "Robertson",, "rrobertson@aibrt.org", c("cre", "aut"))
-Description: Simplifies the production and formatting of descriptive frequencies and
-    statistics tables.
+Description: Towards automation of descriptive frequencies and statistics tables.
 Depends:
     R (>= 3.2.2)
 License: GPL-3
