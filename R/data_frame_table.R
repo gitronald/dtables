@@ -48,3 +48,44 @@ table_perc <- function(table){
   table.perc <- format(round(table.prop*100, 1), nsmall = 1)
   table.perc <- gsub("$", "%", table.perc)
 }
+
+
+
+# Short Hand Name ---------------------------------------------------------
+
+#' Create a data.frame table
+#'
+#' Create a table with a data.frame structure and optional proportion and
+#' percentage columns
+#'
+#' @param data1 a vector or data.frame column
+#' @param prop logical, if \code{TRUE} returns an additional proportion column
+#' @param perc logical, if \code{TRUE} returns an additional percentage column
+#'
+#' @return a data.frame table with optional proportion and percentage columns
+#' @export
+#'
+#' @examples
+#' data_frame_table(iris2$Species)
+#' data_frame_table(iris2$Species, prop = FALSE)
+dft <- function(data1, prop = TRUE, perc = TRUE){
+  t    <- table(data1)
+  dft  <- data.frame(t)
+
+  if(ncol(dft) == 2) {
+    names(dft) <- c("group", "n")
+  } else if(ncol(dft) > 2){
+    names(dft)[3] <- "n"
+  }
+
+  if(prop) {
+    prop <- table_prop(t)
+    dft  <- data.frame(dft, prop)
+  }
+  if(perc) {
+    perc <- table_perc(t)
+    dft <- data.frame(dft, perc)
+  }
+
+  return(dft)
+}
