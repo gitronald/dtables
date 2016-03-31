@@ -27,10 +27,10 @@
 #' dtable(iris2)
 #'
 #' #Analyze two or more variables
-#' dtable(iris2, variables = c("Color", "Sold", "LikelyToBuy"))
+#' dtable(iris2, c("Color", "Sold", "LikelyToBuy"))
 #'
 #' # Analyze a single variable
-#' dtable(iris2, variables = "Color")
+#' dtable(iris2, "Color")
 #'
 #' # Return raw output
 #' dtable(iris2, neat = FALSE)
@@ -47,14 +47,19 @@ dtable <- function (data1,
                     statistics = NULL,
                     neat = TRUE, as.list = FALSE, sizesort = FALSE){
 
-  if(is.null(variables)) variables <- names(data1)
-  var.details  <- dvariable(data1, variables)  # Extract variable details
-
-  if(is.null(frequencies)) { # Default to dvariable prediction
-    frequencies <- paste(var.details[var.details["frequencies"] == 1, "variable"])
+  if(is.null(variables) & is.null(frequencies) & is.null(statistics)){
+    variables = names(data1)
+    var.details  <- dvariable(data1, variables)  # Extract variable details
   }
-  if(is.null(statistics)) { # Default to dvariable prediction
-    statistics  <- paste(var.details[var.details["statistics"] == 1, "variable"])
+  if(is.null(variables) & !is.null(frequencies) & is.null(statistics)) {
+    frequencies = frequencies
+  }
+  if(is.null(variables) & is.null(frequencies) & !is.null(statistics)) {
+    statistics = statistics
+  }
+  if(!is.null(variables) & is.null(frequencies) & is.null(statistics)) {
+    variables = variables
+    var.details  <- dvariable(data1, variables)  # Extract variable details
   }
 
   dtable <- create_list(c("Frequencies", "Statistics"), 1)
