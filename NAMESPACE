@@ -3,6 +3,7 @@
 export(create_list)
 export(data_frame_table)
 export(dfactor)
+export(dft)
 export(dnumeric)
 export(dtable)
 export(dvariable)

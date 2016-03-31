@@ -41,10 +41,10 @@ variable aspects such as class.
 dtable(iris2)
 
 #Analyze two or more variables
-dtable(iris2, variables = c("Color", "Sold", "LikelyToBuy"))
+dtable(iris2, c("Color", "Sold", "LikelyToBuy"))
 
 # Analyze a single variable
-dtable(iris2, variables = "Color")
+dtable(iris2, "Color")
 
 # Return raw output
 dtable(iris2, neat = FALSE)
