@@ -4,7 +4,7 @@
 \alias{dft}
 \title{Create a data.frame table}
 \usage{
-dft(data1, prop = TRUE, perc = TRUE)
+dft(data1, prop = TRUE, perc = TRUE, by = NULL)
 }
 \arguments{
 \item{data1}{a vector or data.frame column}
@@ -12,6 +12,8 @@ dft(data1, prop = TRUE, perc = TRUE)
 \item{prop}{logical, if \code{TRUE} returns an additional proportion column}
 
 \item{perc}{logical, if \code{TRUE} returns an additional percentage column}
+
+\item{by}{numeric variable to return descriptive statistics for}
 }
 \value{
 a data.frame table with optional proportion and percentage columns

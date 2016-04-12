@@ -6,14 +6,17 @@
 #' @param data1 a vector or data.frame column
 #' @param prop logical, if \code{TRUE} returns an additional proportion column
 #' @param perc logical, if \code{TRUE} returns an additional percentage column
+#' @param by numeric variable to return descriptive statistics for
 #'
-#' @return a data.frame table with optional proportion and percentage columns
+#' @return a data.frame table with optional proportion, percentage, and
+#'   descriptive statistics columns
+#' @import psych
 #' @export
 #'
 #' @examples
 #' data_frame_table(iris2$Species)
 #' data_frame_table(iris2$Species, prop = FALSE)
-data_frame_table <- function(data1, prop = TRUE, perc = TRUE){
+data_frame_table <- function(data1, prop = TRUE, perc = TRUE, by = NULL){
   t    <- table(data1)
   dft  <- data.frame(t)
 
@@ -30,6 +33,10 @@ data_frame_table <- function(data1, prop = TRUE, perc = TRUE){
   if(perc) {
     perc <- table_perc(t)
     dft <- data.frame(dft, perc)
+  }
+  if(!is.null(by)) {
+    descr <- describeBy(by, data1, mat = T)
+    dft <- cbind(dft, descr[, 5:15])
   }
 
   return(dft)
@@ -61,14 +68,16 @@ table_perc <- function(table){
 #' @param data1 a vector or data.frame column
 #' @param prop logical, if \code{TRUE} returns an additional proportion column
 #' @param perc logical, if \code{TRUE} returns an additional percentage column
+#' @param by numeric variable to return descriptive statistics for
 #'
 #' @return a data.frame table with optional proportion and percentage columns
+#' @import psych
 #' @export
 #'
 #' @examples
 #' data_frame_table(iris2$Species)
 #' data_frame_table(iris2$Species, prop = FALSE)
-dft <- function(data1, prop = TRUE, perc = TRUE){
+dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL){
   t    <- table(data1)
   dft  <- data.frame(t)
 
@@ -85,6 +94,11 @@ dft <- function(data1, prop = TRUE, perc = TRUE){
   if(perc) {
     perc <- table_perc(t)
     dft <- data.frame(dft, perc)
+  }
+
+  if(!is.null(by)) {
+    descr <- describeBy(by, data1, mat = T)
+    dft <- cbind(dft, descr[, 5:15])
   }
 
   return(dft)

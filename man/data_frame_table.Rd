@@ -4,7 +4,7 @@
 \alias{data_frame_table}
 \title{Create a data.frame table}
 \usage{
-data_frame_table(data1, prop = TRUE, perc = TRUE)
+data_frame_table(data1, prop = TRUE, perc = TRUE, by = NULL)
 }
 \arguments{
 \item{data1}{a vector or data.frame column}
@@ -12,9 +12,12 @@ data_frame_table(data1, prop = TRUE, perc = TRUE)
 \item{prop}{logical, if \code{TRUE} returns an additional proportion column}
 
 \item{perc}{logical, if \code{TRUE} returns an additional percentage column}
+
+\item{by}{numeric variable to return descriptive statistics for}
 }
 \value{
-a data.frame table with optional proportion and percentage columns
+a data.frame table with optional proportion, percentage, and
+  descriptive statistics columns
 }
 \description{
 Create a table with a data.frame structure and optional proportion and
