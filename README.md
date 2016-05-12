@@ -15,6 +15,8 @@ data(iris2)
 
 ``` {r}
 > dft(iris2$Species, prop = TRUE, perc = TRUE)
+```
+```
        group  n      prop  perc
 1     setosa 52 0.3466667 34.7%
 2 versicolor 49 0.3266667 32.7%
