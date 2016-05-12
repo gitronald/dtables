@@ -6,7 +6,7 @@
 #' variable aspects such as class.
 #'
 #' @param data1 a \code{data.frame} or \code{matrix}
-#' @param variables select which columns of \code{data1} to analyze
+#' @param vars select which columns of \code{data1} to analyze
 #' @param frequencies select which columns to create frequencies tables for
 #' @param statistics select which columns to create statistics tables for
 #' @param neat logical, if \code{TRUE} returns rounded and formatted tables
@@ -27,10 +27,10 @@
 #' dtable(iris2)
 #'
 #' #Analyze two or more variables
-#' dtable(iris2, variables = c("Color", "Sold", "LikelyToBuy"))
+#' dtable(iris2, vars = c("Color", "Sold", "LikelyToBuy"))
 #'
 #' # Analyze a single variable
-#' dtable(iris2, variables = "Color")
+#' dtable(iris2, vars = "Color")
 #'
 #' # Return raw output
 #' dtable(iris2, neat = FALSE)
@@ -42,13 +42,13 @@
 #' dtable(iris2, sizesort = TRUE)
 #'
 dtable <- function (data1,
-                    variables = NULL,
+                    vars = NULL,
                     frequencies = NULL,
                     statistics = NULL,
                     neat = TRUE, as.list = FALSE, sizesort = FALSE){
 
-  if(is.null(variables)) variables <- names(data1)
-  var.details  <- dvariable(data1, variables)  # Extract variable details
+  if(is.null(vars)) vars <- names(data1)
+  var.details  <- dvariable(data1, vars)  # Extract variable details
 
   if(is.null(frequencies)) { # Default to dvariable prediction
     frequencies <- paste(var.details[var.details["frequencies"] == 1, "variable"])

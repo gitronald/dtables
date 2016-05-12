@@ -4,13 +4,13 @@
 \alias{dtable}
 \title{Generate descriptive frequencies and statistics tables}
 \usage{
-dtable(data1, variables = NULL, frequencies = NULL, statistics = NULL,
+dtable(data1, vars = NULL, frequencies = NULL, statistics = NULL,
   neat = TRUE, as.list = FALSE, sizesort = FALSE)
 }
 \arguments{
 \item{data1}{a \code{data.frame} or \code{matrix}}
 
-\item{variables}{select which columns of \code{data1} to analyze}
+\item{vars}{select which columns of \code{data1} to analyze}
 
 \item{frequencies}{select which columns to create frequencies tables for}
 
@@ -41,10 +41,10 @@ variable aspects such as class.
 dtable(iris2)
 
 #Analyze two or more variables
-dtable(iris2, variables = c("Color", "Sold", "LikelyToBuy"))
+dtable(iris2, vars = c("Color", "Sold", "LikelyToBuy"))
 
 # Analyze a single variable
-dtable(iris2, variables = "Color")
+dtable(iris2, vars = "Color")
 
 # Return raw output
 dtable(iris2, neat = FALSE)
