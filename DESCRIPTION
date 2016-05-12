@@ -7,6 +7,8 @@ Depends:
     R (>= 3.2.2)
 License: GPL-3
 LazyData: true
+URL: https://github.com/gitronald/dtables
+BugReports: https://github.com/gitronald/dtables/issues
 RoxygenNote: 5.0.1
 Imports:
     psych
