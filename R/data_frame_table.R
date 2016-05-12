@@ -1,26 +1,37 @@
 #' Create a data.frame table
 #'
-#' Create a table with a data.frame structure and optional proportion and
-#' percentage columns
+#' Create a table with a data.frame structure and optional proportion,
+#' percentage, and descriptive statistics columns. Can be used by its shorthand
+#' alias \code{dft}.
 #'
 #' @param data1 a vector or data.frame column
 #' @param prop logical, if \code{TRUE} returns an additional proportion column
 #' @param perc logical, if \code{TRUE} returns an additional percentage column
+#' @param by numeric variable to return descriptive statistics for
+#' @aliases dft
 #'
-#' @return a data.frame table with optional proportion and percentage columns
+#' @return a data.frame table with optional proportion, percentage, and
+#'   descriptive statistics columns
+#' @import psych
 #' @export
 #'
 #' @examples
 #' data_frame_table(iris2$Species)
-#' data_frame_table(iris2$Species, prop = FALSE)
-data_frame_table <- function(data1, prop = TRUE, perc = TRUE){
+#' data_frame_table(iris2$Species, by = iris2$Sepal.Length)
+#'
+#' # Or using shorthand:
+#'
+#' dft(iris2$Species)
+#' dft(iris2$Species, by = iris2$Sepal.Length)
+#'
+data_frame_table <- function(data1, prop = TRUE, perc = TRUE, by = NULL){
   t    <- table(data1)
   dft  <- data.frame(t)
 
   if(ncol(dft) == 2) {
     names(dft) <- c("group", "n")
   } else if(ncol(dft) > 2){
-    names(dft)[3] <- "n"
+    names(dft)[length(dft)] <- "n"
   }
 
   if(prop) {
@@ -30,6 +41,10 @@ data_frame_table <- function(data1, prop = TRUE, perc = TRUE){
   if(perc) {
     perc <- table_perc(t)
     dft <- data.frame(dft, perc)
+  }
+  if(!is.null(by)) {
+    descr <- describeBy(by, data1, mat = T)
+    dft <- cbind(dft, descr[, 5:15])
   }
 
   return(dft)
@@ -47,4 +62,12 @@ table_perc <- function(table){
   table.prop <- table_prop(table)
   table.perc <- format(round(table.prop*100, 1), nsmall = 1)
   table.perc <- gsub("$", "%", table.perc)
+}
+
+
+#' @rdname data_frame_table
+#' @export
+dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL) {
+  dft = data_frame_table(data1, prop = prop, perc = perc, by = by)
+  return(dft)
 }

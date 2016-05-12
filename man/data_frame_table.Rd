@@ -2,9 +2,12 @@
 % Please edit documentation in R/data_frame_table.R
 \name{data_frame_table}
 \alias{data_frame_table}
+\alias{dft}
 \title{Create a data.frame table}
 \usage{
-data_frame_table(data1, prop = TRUE, perc = TRUE)
+data_frame_table(data1, prop = TRUE, perc = TRUE, by = NULL)
+
+dft(data1, prop = TRUE, perc = TRUE, by = NULL)
 }
 \arguments{
 \item{data1}{a vector or data.frame column}
@@ -12,16 +15,26 @@ data_frame_table(data1, prop = TRUE, perc = TRUE)
 \item{prop}{logical, if \code{TRUE} returns an additional proportion column}
 
 \item{perc}{logical, if \code{TRUE} returns an additional percentage column}
+
+\item{by}{numeric variable to return descriptive statistics for}
 }
 \value{
-a data.frame table with optional proportion and percentage columns
+a data.frame table with optional proportion, percentage, and
+  descriptive statistics columns
 }
 \description{
-Create a table with a data.frame structure and optional proportion and
-percentage columns
+Create a table with a data.frame structure and optional proportion,
+percentage, and descriptive statistics columns. Can be used by its shorthand
+alias \code{dft}.
 }
 \examples{
 data_frame_table(iris2$Species)
-data_frame_table(iris2$Species, prop = FALSE)
+data_frame_table(iris2$Species, by = iris2$Sepal.Length)
+
+# Or using shorthand:
+
+dft(iris2$Species)
+dft(iris2$Species, by = iris2$Sepal.Length)
+
 }
 
