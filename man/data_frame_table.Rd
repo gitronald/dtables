@@ -3,7 +3,7 @@
 \name{data_frame_table}
 \alias{data_frame_table}
 \alias{dft}
-\title{Create a data.frame table}
+\title{Create a data.frame table (dft)}
 \usage{
 data_frame_table(data1, prop = TRUE, perc = TRUE, by = NULL)
 

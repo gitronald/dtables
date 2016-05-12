@@ -58,7 +58,7 @@ predict_variable <- function(data1) {
     treatas[i, 1] <- ifelse(data1[i, "levels"] < 15 & data1[i, "levels"] > 0, 1, 0)
     treatas[i, 2] <- ifelse(data1[i, "class"] %in% c("numeric", "integer"), 1, 0)
     if(sum(treatas[i, 1:2]) == 0) {
-      message("Note: '", data1[i, "variable"], "' was not classified. Force with name in frequencies or statistics arguments")
+      message("Note: '", data1[i, "variable"], "' was not classified.")
     }
   }
 

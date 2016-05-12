@@ -1,4 +1,4 @@
-#' Create a data.frame table
+#' Create a data.frame table (dft)
 #'
 #' Create a table with a data.frame structure and optional proportion,
 #' percentage, and descriptive statistics columns. Can be used by its shorthand

@@ -1,6 +1,6 @@
 #' Demographic Factor Frequencies Tables
 #'
-#' This function converts a column(s) from a \code{data.frame} into a
+#' This function converts columns from a \code{data.frame} into a
 #' frequencies table formatted in standard presentation structure with percent
 #' symbols.
 #'
@@ -11,10 +11,10 @@
 #' @return Returns a demographic frequencies table in \code{data.frame} format.
 #' @export
 #' @examples
-#' # Single demographic
+#' # Single frequency table
 #' dfactor(iris2, "Species")
 #'
-#' # Two demographics
+#' # Multiple frequency tables
 #' dfactor(iris2, c("Color", "Species"))
 dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
 
