@@ -27,6 +27,8 @@ data(iris2)
 
 ``` {r}
 > dft(iris2$Species, by = iris2$Sepal.Length)
+```
+```
         group  n      prop  perc     mean        sd median  trimmed     mad min max range ...
 11     setosa 52 0.3466667 34.7% 4.955769 0.3460780    5.0 4.945238 0.29652 4.3 5.7   1.4 
 12 versicolor 49 0.3266667 32.7% 5.963265 0.4893422    6.0 5.978049 0.59304 4.9 6.9   2.0 
@@ -39,6 +41,8 @@ data(iris2)
 
 ``` {r}
 > dvariable(iris2)
+```
+```
 Note: 'Approval' was not classified.
 Note: 'Date' was not classified.
          variable     class      mode      type levels frequencies statistics
@@ -65,6 +69,8 @@ Note: 'Date' was not classified.
 
 ``` {r}
 > dtable(iris2)
+```
+```
 $Frequencies
    dataset    demographic      group  n  perc
 1    iris2        Species     setosa 52 34.7%
