@@ -38,8 +38,9 @@ data(iris2)
 ```
 
 ### dvariable
-* Variable details for an entire data.frame or for individual variables.
-* Will flag variables that it can't classify (e.g. an NA or overly complex variable)
+* Generate variable details for an entire data.frame or for individual variables.
+* Variables will be classified as frequencies or statistics variables.
+* Will flag variables that it can't classify as frequencies or statistics (e.g. a variable with missing data or a complex variable such as date).
 
 ``` {r}
 > dvariable(iris2)
