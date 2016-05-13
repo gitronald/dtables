@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gitronald/dtables.svg?branch=master)](https://travis-ci.org/gitronald/dtables)
+
 # dtables
 
 * The goal of dtables is to quickly and intelligently generate useful and presentable descriptives frequencies and statistics tables with minimal input.
