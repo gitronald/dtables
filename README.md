@@ -1,5 +1,6 @@
 # dtables
 [![Build Status](https://travis-ci.org/gitronald/dtables.svg?branch=master)](https://travis-ci.org/gitronald/dtables)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dtables)](http://cran.r-project.org/package=dtables)
 
 * The goal of dtables is to quickly and intelligently generate useful and presentable descriptives frequencies and statistics tables with minimal input.
 * The purpose of dtables is really just to make my life, and hopefully yours, a little easier.
@@ -39,8 +40,10 @@ data(iris2)
 
 ### dvariable
 * Generate variable details for an entire data.frame or for individual variables.
-* Variables will be classified as frequencies or statistics variables.
-* Will flag variables that it can't classify as frequencies or statistics (e.g. a variable with missing data or a complex variable such as date).
+* Uses variable details to tag variables as:
+    1. Variables which would make sense in a descriptive frequencies table - `frequencies`
+    2. Variables which would make sense in a descriptive statistics table  - `statistics`
+* Will flag variables that it can't classify as frequencies or statistics (e.g. an empty variable or a complex variable such as date).
 
 ``` {r}
 > dvariable(iris2)
@@ -65,9 +68,7 @@ Note: 'Date' was not classified.
 * Classification matters because these feed into `dtable`...
 
 ### dtable
-* Uses classifications from `dvariable` to sort variables into two categories:
-    1. Variables which would make sense in a descriptive frequencies table
-    2. Variables which would make sense in a descriptive statistics table
+* Uses `dvariable` to decide whether to produce descriptive frequencies and/or statistics tables for each variable and returns output with or without rounding and presentation formatting.
 
 
 ``` {r}
