@@ -27,11 +27,6 @@ percentage, and descriptive statistics columns. Can be used by its shorthand
 alias \code{dft}.
 }
 \examples{
-data_frame_table(iris2$Species)
-data_frame_table(iris2$Species, by = iris2$Sepal.Length)
-
-# Or using shorthand:
-
 dft(iris2$Species)
 dft(iris2$Species, by = iris2$Sepal.Length)
 

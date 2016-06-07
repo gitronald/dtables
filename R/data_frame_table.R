@@ -9,7 +9,6 @@
 #' @param perc logical, if \code{TRUE} returns an additional percentage column
 #' @param by numeric variable to return descriptive statistics for
 #' @param neat logical, if \code{TRUE} returns a tailored dataset
-#' @aliases dft
 #'
 #' @return a data.frame table with optional proportion, percentage, and
 #'   descriptive statistics columns
@@ -17,15 +16,10 @@
 #' @export
 #'
 #' @examples
-#' data_frame_table(iris2$Species)
-#' data_frame_table(iris2$Species, by = iris2$Sepal.Length)
-#'
-#' # Or using shorthand:
-#'
 #' dft(iris2$Species)
 #' dft(iris2$Species, by = iris2$Sepal.Length)
 #'
-dft <- data_frame_table <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
+dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
   t    <- table(data1)
   dft  <- data.frame(t)
 
