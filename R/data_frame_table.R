@@ -68,14 +68,4 @@ table_perc <- function(table){
   table.perc <- format(round(table.prop*100, 1), nsmall = 1)
   table.perc <- gsub("$", "%", table.perc)
 }
-<<<<<<< HEAD
-=======
 
-
-# #' @rdname data_frame_table
-# #' @export
-# dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL) {
-#   dft = data_frame_table(data1, prop = prop, perc = perc, by = by)
-#   return(dft)
-# }
->>>>>>> 90bccdae626ba3af25f2199f976160ea08bfac9e
