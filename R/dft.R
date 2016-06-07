@@ -8,7 +8,7 @@
 #' @param prop logical, if \code{TRUE} returns an additional proportion column
 #' @param perc logical, if \code{TRUE} returns an additional percentage column
 #' @param by numeric variable to return descriptive statistics for
-#' @aliases dft
+#' @param neat logical, if \code{TRUE} returns a tailored dataset
 #'
 #' @return a data.frame table with optional proportion, percentage, and
 #'   descriptive statistics columns
@@ -16,15 +16,10 @@
 #' @export
 #'
 #' @examples
-#' data_frame_table(iris2$Species)
-#' data_frame_table(iris2$Species, by = iris2$Sepal.Length)
-#'
-#' # Or using shorthand:
-#'
 #' dft(iris2$Species)
 #' dft(iris2$Species, by = iris2$Sepal.Length)
 #'
-data_frame_table <- function(data1, prop = TRUE, perc = TRUE, by = NULL){
+dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
   t    <- table(data1)
   dft  <- data.frame(t)
 
@@ -45,18 +40,22 @@ data_frame_table <- function(data1, prop = TRUE, perc = TRUE, by = NULL){
   if(!is.null(by)) {
     descr <- describeBy(by, data1, mat = T)
     dft <- cbind(dft, descr[, 5:15])
+
+    if(neat) {
+      dft <- dft[, c("group", "n", "prop", "perc", "mean", "sd", "se")]
+    }
   }
 
   return(dft)
 }
 
-# data_frame_table helper function - proportions
+# dft helper function - proportions
 # test - print(table_prop(table(iris2$Species)))
 table_prop <- function(table){
   table.prop <- as.vector(table)/sum(table)
 }
 
-# data_frame_table helper function - percentages
+# dft helper function - percentages
 # test - print(table_perc(table(iris2$Species)))
 table_perc <- function(table){
   table.prop <- table_prop(table)
@@ -64,10 +63,3 @@ table_perc <- function(table){
   table.perc <- gsub("$", "%", table.perc)
 }
 
-
-#' @rdname data_frame_table
-#' @export
-dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL) {
-  dft = data_frame_table(data1, prop = prop, perc = perc, by = by)
-  return(dft)
-}
