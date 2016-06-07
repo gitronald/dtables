@@ -49,13 +49,13 @@ dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
   return(dft)
 }
 
-# data_frame_table helper function - proportions
+# dft helper function - proportions
 # test - print(table_prop(table(iris2$Species)))
 table_prop <- function(table){
   table.prop <- as.vector(table)/sum(table)
 }
 
-# data_frame_table helper function - percentages
+# dft helper function - percentages
 # test - print(table_perc(table(iris2$Species)))
 table_perc <- function(table){
   table.prop <- table_prop(table)
