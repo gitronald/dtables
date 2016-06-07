@@ -24,9 +24,9 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
   demographic <- neatify(vars, n, neat)       # Replicate demographic name n times or neatly
 
   if(neat){
-    dft <- data_frame_table(data1[, vars], prop = FALSE, perc = TRUE)
+    dft <- dft(data1[, vars], prop = FALSE, perc = TRUE)
   } else {
-    dft <- data_frame_table(data1[, vars], prop = TRUE, perc = TRUE)
+    dft <- dft(data1[, vars], prop = TRUE, perc = TRUE)
   }
 
   # Sort by Freq
