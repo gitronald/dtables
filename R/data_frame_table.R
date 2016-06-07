@@ -24,7 +24,7 @@
 #' dft(iris2$Species)
 #' dft(iris2$Species, by = iris2$Sepal.Length)
 #'
-data_frame_table <- function(data1, prop = TRUE, perc = TRUE, by = NULL){
+dft <- data_frame_table <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
   t    <- table(data1)
   dft  <- data.frame(t)
 
@@ -45,6 +45,10 @@ data_frame_table <- function(data1, prop = TRUE, perc = TRUE, by = NULL){
   if(!is.null(by)) {
     descr <- describeBy(by, data1, mat = T)
     dft <- cbind(dft, descr[, 5:15])
+
+    if(neat) {
+      dft <- dft[, c("group", "n", "prop", "perc", "mean", "sd", "se")]
+    }
   }
 
   return(dft)
@@ -65,9 +69,9 @@ table_perc <- function(table){
 }
 
 
-#' @rdname data_frame_table
-#' @export
-dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL) {
-  dft = data_frame_table(data1, prop = prop, perc = perc, by = by)
-  return(dft)
-}
+# #' @rdname data_frame_table
+# #' @export
+# dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL) {
+#   dft = data_frame_table(data1, prop = prop, perc = perc, by = by)
+#   return(dft)
+# }
