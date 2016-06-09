@@ -70,7 +70,7 @@ data(iris2)
 * NEW: Neatify - To make neat (crop table bound variables and round numerics): 
 
 ``` {r}
-dft(iris2[, c("Species", "Color")], by = iris2$Sepal.Width, neat = TRUE)
+> dft(iris2[, c("Species", "Color")], by = iris2$Sepal.Width, neat = TRUE)
 ```
 
 ```
