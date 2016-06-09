@@ -1,5 +1,5 @@
 ## Test environments
-* windows x86_64-w64-mingw32 (64-bit), R 3.3.0
+* windows >= 8 x64 build 9200 x86-64 (64-bit), R 3.3.0
 * win-builder(devel and release)
 
 ## R CMD check results

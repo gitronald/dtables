@@ -67,7 +67,7 @@ data(iris2)
 13  virginica 49 0.3266667 32.7% 6.751020 0.6636774    6.8 6.773171 0.74130 4.9 7.7   2.8 
 ```
 
-* NEW: Neatify - To make neat (crop table bound variables and round numerics): 
+* NEW: Neatify - To make neat (crop variables and round): 
 
 ``` {r}
 > dft(iris2[, c("Species", "Color")], by = iris2$Sepal.Width, neat = TRUE)
