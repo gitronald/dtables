@@ -1,6 +1,8 @@
 # dtables
-[![Build Status](https://travis-ci.org/gitronald/dtables.svg?branch=master)](https://travis-ci.org/gitronald/dtables)
+
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dtables)](http://cran.r-project.org/package=dtables)
+[![CRAN_Downloads_Badge](http://cranlogs.r-pkg.org/badges/grand-total/dtables)](http://cranlogs.r-pkg.org/badges/grand-total/dtables)
+[![Build Status](https://travis-ci.org/gitronald/dtables.svg?branch=master)](https://travis-ci.org/gitronald/dtables)
 
 * The goal of dtables is to quickly and intelligently generate useful and presentable descriptive frequencies and statistics tables with minimal input.
 * The purpose of dtables is really just to make my life, and hopefully yours, a little easier.
@@ -8,7 +10,13 @@
 
 ### Getting Started
 ``` {r}
+# Install CRAN version:
+install.packages("dtables")
+
+# Or install Github (more recent, less stable, more fun) version:
 devtools::install_github("gitronald/dtables")
+
+# Load the package and data
 library(dtables)
 data(iris2)
 ```
@@ -25,17 +33,60 @@ data(iris2)
 2 versicolor 49 0.3266667 32.7%
 3  virginica 49 0.3266667 32.7%
 ```
+* Handles mulitple variables
+
+``` {r}
+> dft(iris2[, c("Species", "Color")])
+```
+
+```
+      Species  Color  n       prop  perc
+1      setosa   blue 15 0.10000000 10.0%
+2  versicolor   blue 16 0.10666667 10.7%
+3   virginica   blue 16 0.10666667 10.7%
+4      setosa orange 11 0.07333333  7.3%
+5  versicolor orange  8 0.05333333  5.3%
+6   virginica orange 11 0.07333333  7.3%
+7      setosa    red 13 0.08666667  8.7%
+8  versicolor    red 16 0.10666667 10.7%
+9   virginica    red 11 0.07333333  7.3%
+10     setosa yellow 13 0.08666667  8.7%
+11 versicolor yellow  9 0.06000000  6.0%
+12  virginica yellow 11 0.07333333  7.3%
+```
 
 * To add descriptive statistics to your dft, simply add a `by` argument with the variable to describe: 
 
 ``` {r}
-> dft(iris2$Species, by = iris2$Sepal.Length)
+> dft(iris2$Species, by = iris2$Sepal.Length, neat = FALSE)
 ```
 ```
         group  n      prop  perc     mean        sd median  trimmed     mad min max range ...
 11     setosa 52 0.3466667 34.7% 4.955769 0.3460780    5.0 4.945238 0.29652 4.3 5.7   1.4 
 12 versicolor 49 0.3266667 32.7% 5.963265 0.4893422    6.0 5.978049 0.59304 4.9 6.9   2.0 
 13  virginica 49 0.3266667 32.7% 6.751020 0.6636774    6.8 6.773171 0.74130 4.9 7.7   2.8 
+```
+
+* NEW: Neatify - To make neat (crop table bound variables and round numerics): 
+
+``` {r}
+dft(iris2[, c("Species", "Color")], by = iris2$Sepal.Width, neat = TRUE)
+```
+
+```
+       Species  Color  n prop mean  sd  se
+11      setosa   blue 15  0.1  3.3 0.4 0.1
+12  versicolor   blue 16  0.1  2.8 0.3 0.1
+13   virginica   blue 16  0.1  3.1 0.3 0.1
+14      setosa orange 11  0.1  3.3 0.3 0.1
+15  versicolor orange  8  0.1  3.0 0.3 0.1
+16   virginica orange 11  0.1  3.0 0.3 0.1
+17      setosa    red 13  0.1  3.4 0.4 0.1
+18  versicolor    red 16  0.1  2.7 0.4 0.1
+19   virginica    red 11  0.1  2.9 0.3 0.1
+110     setosa yellow 13  0.1  3.7 0.4 0.1
+111 versicolor yellow  9  0.1  2.7 0.3 0.1
+112  virginica yellow 11  0.1  2.9 0.3 0.1
 ```
 
 ### dvariable
