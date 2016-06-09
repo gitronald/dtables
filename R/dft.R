@@ -39,10 +39,11 @@ dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
   }
   if(!is.null(by)) {
     descr <- describeBy(by, data1, mat = T)
-    dft <- cbind(dft, descr[, 5:15])
-
+    dft <- cbind(dft, descr[, (which(names(descr) == "n")+1):length(descr)])
     if(neat) {
-      dft <- dft[, c("group", "n", "prop", "perc", "mean", "sd", "se")]
+      dft <- cbind(dft[, 1:which(names(dft) == "n")],
+                   round(dft[, c("prop", "mean", "sd", "se")],
+                         digits = 1))
     }
   }
 
