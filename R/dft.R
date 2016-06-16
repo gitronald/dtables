@@ -39,23 +39,24 @@ dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
   }
   if(!is.null(by)) {
     descr <- describeBy(by, data1, mat = T)
-    dft <- cbind(dft, descr[, 5:15])
-
+    dft <- cbind(dft, descr[, (which(names(descr) == "n")+1):length(descr)])
     if(neat) {
-      dft <- dft[, c("group", "n", "prop", "perc", "mean", "sd", "se")]
+      dft <- cbind(dft[, 1:which(names(dft) == "n")],
+                   round(dft[, c("prop", "mean", "sd", "se")],
+                         digits = 1))
     }
   }
 
   return(dft)
 }
 
-# data_frame_table helper function - proportions
+# dft helper function - proportions
 # test - print(table_prop(table(iris2$Species)))
 table_prop <- function(table){
   table.prop <- as.vector(table)/sum(table)
 }
 
-# data_frame_table helper function - percentages
+# dft helper function - percentages
 # test - print(table_perc(table(iris2$Species)))
 table_perc <- function(table){
   table.prop <- table_prop(table)
