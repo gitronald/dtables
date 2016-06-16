@@ -1,6 +1,6 @@
 Package: dtables
 Title: Simplifying Descriptive Frequencies and Statistics
-<<<<<<< HEAD
+
 Version: 0.0.2
 Authors@R: person(c("Ronald", "E."), "Robertson",, "rrobertson@aibrt.org", c("cre", "aut"))
 =======
