@@ -4,4 +4,4 @@
 ^cran-comments\.md$
 ^data-raw$
 ^revdep$
-^.travis.yml
+^\.travis\.yml
