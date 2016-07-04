@@ -1,4 +1,3 @@
-
 #' list.files 2.0
 #'
 #' The output of `list.files`, but easier to read.
