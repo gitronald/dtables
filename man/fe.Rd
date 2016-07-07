@@ -17,7 +17,8 @@ nothing, opens the file specified
 The usage of `file.edit`, but easier.
 }
 \examples{
-fe()
+# Open the first file in your current wd
+fe(1)
 
 }
 

@@ -8,11 +8,14 @@
 #' @return nothing, opens the file specified
 #' @export
 #'
+#' @importFrom utils file.edit
+#'
 #' @examples
-#' fe()
+#' # Open the first file in your current wd
+#' fe(1)
 #'
 fe = function(rowNum = 1){
   fileNames = as.character(lf()[, 1])
   fileName = fileNames[rowNum]
-  file.edit(fileName)
+  file.edit(fileName, editor = "internal")
 }

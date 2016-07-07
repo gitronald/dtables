@@ -12,6 +12,8 @@
 #' @return Returns a data.frame version of the standard htest output
 #' @export
 #'
+#' @importFrom stats cor.test
+#'
 #' @examples
 #' cor_test(sample(1:100, 100), sample(1:100, 100), method = "pearson")
 #'
