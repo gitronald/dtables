@@ -9,7 +9,10 @@
 #'   kendall
 #' @param round logical, whether or not to round the results
 #'
-#' @return Returns a data.frame version of the standard htest output
+#' @return Returns a data.frame version of the standard htest output. Use
+#'   intended for presentation of data because numbers are converted to
+#'   character and then back to numeric, trimming each values length and
+#'   costing you precision.
 #' @export
 #'
 #' @importFrom stats cor.test
