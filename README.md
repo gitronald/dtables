@@ -7,6 +7,7 @@
 * The goal of dtables is to quickly and intelligently generate useful and presentable descriptive frequencies and statistics tables with minimal input.
 * The purpose of dtables is really just to make my life, and hopefully yours, a little easier.
 * If you have any questions or want to help out feel free to send me an email or a pull request! My email can be found in the DESCRIPTION.
+* See the latest changes since the CRAN version in the [NEWS](NEWS.md)
 
 ### Getting Started
 ``` {r}
