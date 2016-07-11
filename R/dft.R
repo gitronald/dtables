@@ -1,8 +1,6 @@
 #' Create a data.frame table (dft)
 #'
-#' Create a table with a data.frame structure and optional proportion,
-#' percentage, and descriptive statistics columns. Can be used by its shorthand
-#' alias \code{dft}.
+#' Create a descriptive frequencies table with descriptive statistics by group.
 #'
 #' @param data1 a vector or data.frame column
 #' @param prop logical, if \code{TRUE} returns an additional proportion column
@@ -19,7 +17,7 @@
 #' dft(iris2$Species)
 #' dft(iris2$Species, by = iris2$Sepal.Length)
 #'
-dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
+dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE, digits = 2){
   t    <- table(data1)
   dft  <- data.frame(t)
 
@@ -46,7 +44,7 @@ dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
     if(neat) {
       dft <- cbind(dft[, 1:which(names(dft) == "n")],
                    round(dft[, c("prop", "mean", "sd", "se")],
-                         digits = 1))
+                         digits = digits))
     }
   }
 
