@@ -23,8 +23,11 @@ dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE){
   t    <- table(data1)
   dft  <- data.frame(t)
 
+  var1 = deparse(substitute(data1))
+  var1 = strsplit(var1, "\\$")[[1]][2]
+
   if(ncol(dft) == 2) {
-    names(dft) <- c("group", "n")
+    names(dft) <- c(var1, "n")
   } else if(ncol(dft) > 2){
     names(dft)[length(dft)] <- "n"
   }
