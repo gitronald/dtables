@@ -17,10 +17,13 @@ kendall}
 \item{round}{logical, whether or not to round the results}
 }
 \value{
-Returns a data.frame version of the standard htest output
+Returns a data.frame version of the standard htest output. Use
+  intended for presentation of data because numbers are converted to
+  character and then back to numeric, trimming each values length and
+  costing you precision.
 }
 \description{
-A wrapper for `cor.test()`, that returns data in a data.frame rather than a
+A wrapper for cor.test that returns data in a data.frame rather than a
 cumbersome list
 }
 \examples{

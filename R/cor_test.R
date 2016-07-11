@@ -1,6 +1,6 @@
 #' Correlation tests
 #'
-#' A wrapper for `cor.test()`, that returns data in a data.frame rather than a
+#' A wrapper for cor.test that returns data in a data.frame rather than a
 #' cumbersome list
 #'
 #' @param var1 a vector to correlate with var2
