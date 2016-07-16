@@ -7,6 +7,7 @@
 #' @param perc logical, if \code{TRUE} returns an additional percentage column
 #' @param by numeric variable to return descriptive statistics for
 #' @param neat logical, if \code{TRUE} returns a tailored dataset
+#' @param digits integer, number of digits to round to
 #'
 #' @return a data.frame table with optional proportion, percentage, and
 #'   descriptive statistics columns

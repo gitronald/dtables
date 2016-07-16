@@ -1,4 +1,6 @@
-# dtables 0.0.2 
+# dtables 0.1.0
+
+Making life easier
 
 * Removed `data_frame_table`, only `dft` available now
 * Added `neat` argument to dft to reduce columns and round numerics when `TRUE`

@@ -4,7 +4,8 @@
 \alias{dft}
 \title{Create a data.frame table (dft)}
 \usage{
-dft(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE)
+dft(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE,
+  digits = 2)
 }
 \arguments{
 \item{data1}{a vector or data.frame column}
@@ -16,15 +17,15 @@ dft(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE)
 \item{by}{numeric variable to return descriptive statistics for}
 
 \item{neat}{logical, if \code{TRUE} returns a tailored dataset}
+
+\item{digits}{integer, number of digits to round to}
 }
 \value{
 a data.frame table with optional proportion, percentage, and
   descriptive statistics columns
 }
 \description{
-Create a table with a data.frame structure and optional proportion,
-percentage, and descriptive statistics columns. Can be used by its shorthand
-alias \code{dft}.
+Create a descriptive frequencies table with descriptive statistics by group.
 }
 \examples{
 dft(iris2$Species)
