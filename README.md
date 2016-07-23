@@ -23,7 +23,7 @@ data(iris2)
 ```
 
 ### The data.frame table (dft)
-* Essentially a shortcut to `data.frame(table(x))`, but with bells and whistles including optional proportion and percentage columns, and a full range of descriptive statistics for a target variable courtesy a la `describe` function from the `psych` package. 
+* Essentially a shortcut to `data.frame(table(x))`, but better, much better:
 
 ``` {r}
 > dft(iris2$Species, prop = TRUE, perc = TRUE)
@@ -33,27 +33,6 @@ data(iris2)
 1     setosa 52 0.3466667 34.7%
 2 versicolor 49 0.3266667 32.7%
 3  virginica 49 0.3266667 32.7%
-```
-* Handles mulitple variables
-
-``` {r}
-> dft(iris2[, c("Species", "Color")])
-```
-
-```
-      Species  Color  n       prop  perc
-1      setosa   blue 15 0.10000000 10.0%
-2  versicolor   blue 16 0.10666667 10.7%
-3   virginica   blue 16 0.10666667 10.7%
-4      setosa orange 11 0.07333333  7.3%
-5  versicolor orange  8 0.05333333  5.3%
-6   virginica orange 11 0.07333333  7.3%
-7      setosa    red 13 0.08666667  8.7%
-8  versicolor    red 16 0.10666667 10.7%
-9   virginica    red 11 0.07333333  7.3%
-10     setosa yellow 13 0.08666667  8.7%
-11 versicolor yellow  9 0.06000000  6.0%
-12  virginica yellow 11 0.07333333  7.3%
 ```
 
 * To add descriptive statistics to your dft, simply add a `by` argument with the variable to describe: 
@@ -68,7 +47,7 @@ data(iris2)
 13  virginica 49 0.3266667 32.7% 6.751020 0.6636774    6.8 6.773171 0.74130 4.9 7.7   2.8 
 ```
 
-* NEW: Neatify - To make neat (crop variables and round): 
+* Some like it neat: 
 
 ``` {r}
 > dft(iris2[, c("Species", "Color")], by = iris2$Sepal.Width, neat = TRUE)
