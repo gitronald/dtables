@@ -37,7 +37,9 @@ write_object <- function(object, dir = NULL, date = TRUE, overwrite = FALSE, row
     }
   }
 
-  col.names = ifelse(row.names, NA, TRUE)
+  if(col.names){
+    col.names = ifelse(row.names, NA, TRUE)
+  }
 
   write.table(object,
               file = file.name,
