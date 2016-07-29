@@ -10,6 +10,7 @@
 #' @param date logical, if \code{TRUE} appends the object name with todays date
 #' @param overwrite logical, if \code{TRUE} overwrites existing file of same name
 #' @param row.names logical, if \code{TRUE} adds rownames to output file
+#' @param col.names logical, if \code{TRUE} adds column names to output file
 #' @return Returns nothing. Saves "object_date.tsv" or "object.tsv" to current
 #'   directory.
 #' @importFrom utils write.table
@@ -17,7 +18,7 @@
 #' @examples
 #' write_object(iris2)
 #'
-write_object <- function(object, dir = NULL, date = TRUE, overwrite = FALSE, row.names = FALSE) {
+write_object <- function(object, dir = NULL, date = TRUE, overwrite = FALSE, row.names = FALSE, col.names = TRUE) {
   if(date){
     date <- paste0("_", Sys.Date())
   } else {

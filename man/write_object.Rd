@@ -5,7 +5,7 @@
 \title{Write an object to a file}
 \usage{
 write_object(object, dir = NULL, date = TRUE, overwrite = FALSE,
-  row.names = FALSE)
+  row.names = FALSE, col.names = TRUE)
 }
 \arguments{
 \item{object}{a data.frame, matrix, or vector to write out}
@@ -18,6 +18,8 @@ the object, defaults to current working directory.}
 \item{overwrite}{logical, if \code{TRUE} overwrites existing file of same name}
 
 \item{row.names}{logical, if \code{TRUE} adds rownames to output file}
+
+\item{col.names}{logical, if \code{TRUE} adds column names to output file}
 }
 \value{
 Returns nothing. Saves "object_date.tsv" or "object.tsv" to current
