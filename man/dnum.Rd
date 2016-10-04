@@ -11,7 +11,7 @@ dnum(data1, neat = TRUE, sizesort = FALSE)
 
 \item{sizesort}{logical, returns sorted data by mean if \code{TRUE}}
 
-\item{data}{a \code{data.frame} column or vector}
+\item{data}{a \code{data.frame} column or columns, or a \code{list}}
 }
 \value{
 Returns a \code{data.frame} with common descriptive statistics for a
@@ -26,6 +26,8 @@ variables.
 \examples{
 # Single variable
 dnum(iris2$Sepal.Length)
+
+# Multiple variables
 dnum(iris2[, c("Sepal.Length", "Sepal.Width")])
 
 # Use \\link{\\code{dtable}} for multiple variables

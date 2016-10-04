@@ -4,7 +4,7 @@
 #' variable being examined to its output. Used in \code{dtable} for multiple
 #' variables.
 #'
-#' @param data a \code{data.frame} column or vector
+#' @param data a \code{data.frame} column or columns, or a \code{list}
 #' @param neat logical, returns rounded values if \code{TRUE}
 #' @param sizesort logical, returns sorted data by mean if \code{TRUE}
 #' @seealso See \code{\link{dtable}}
@@ -14,11 +14,12 @@
 #'   numeric variable, as defined in \code{psych::describe}, concatenated with
 #'   the name of the dataset and the name of the variable.
 #' @importFrom psych describe
-#' @importFrom dtables dnum
 #' @export
 #' @examples
 #' # Single variable
 #' dnum(iris2$Sepal.Length)
+#'
+#' # Multiple variables
 #' dnum(iris2[, c("Sepal.Length", "Sepal.Width")])
 #'
 #' # Use \link{\code{dtable}} for multiple variables
