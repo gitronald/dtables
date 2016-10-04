@@ -34,6 +34,6 @@ dnumeric <- function(data, vnames, neat = TRUE, sizesort = FALSE) {
   if (sizesort) {
     results <- results[order(results[, "mean"], decreasing = TRUE), ]
   }
-
+  row.names(results) = NULL
   return(results)
 }
