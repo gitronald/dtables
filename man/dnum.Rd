@@ -7,11 +7,11 @@
 dnum(data1, neat = TRUE, sizesort = FALSE)
 }
 \arguments{
+\item{data1}{a \code{data.frame} column or columns, or a \code{list}}
+
 \item{neat}{logical, returns rounded values if \code{TRUE}}
 
 \item{sizesort}{logical, returns sorted data by mean if \code{TRUE}}
-
-\item{data}{a \code{data.frame} column or columns, or a \code{list}}
 }
 \value{
 Returns a \code{data.frame} with common descriptive statistics for a
@@ -24,13 +24,18 @@ variable being examined to its output. Used in \code{dtable} for multiple
 variables.
 }
 \examples{
+
 # Single variable
 dnum(iris2$Sepal.Length)
+dnum(iris2["Sepal.Length"])
+dnum(iris2[, "Sepal.Length"])
 
 # Multiple variables
 dnum(iris2[, c("Sepal.Length", "Sepal.Width")])
 
-# Use \\link{\\code{dtable}} for multiple variables
+# Will not save you from yourself (will create numeric data for factors):
+dnum(iris2$Species)
+
 }
 \seealso{
 See \code{\link{dtable}}

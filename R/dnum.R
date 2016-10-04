@@ -4,7 +4,7 @@
 #' variable being examined to its output. Used in \code{dtable} for multiple
 #' variables.
 #'
-#' @param data a \code{data.frame} column or columns, or a \code{list}
+#' @param data1 a \code{data.frame} column or columns, or a \code{list}
 #' @param neat logical, returns rounded values if \code{TRUE}
 #' @param sizesort logical, returns sorted data by mean if \code{TRUE}
 #' @seealso See \code{\link{dtable}}
@@ -16,16 +16,22 @@
 #' @importFrom psych describe
 #' @export
 #' @examples
+#'
 #' # Single variable
 #' dnum(iris2$Sepal.Length)
+#' dnum(iris2["Sepal.Length"])
+#' dnum(iris2[, "Sepal.Length"])
 #'
 #' # Multiple variables
 #' dnum(iris2[, c("Sepal.Length", "Sepal.Width")])
 #'
-#' # Use \link{\code{dtable}} for multiple variables
+#' # Will not save you from yourself (will create numeric data for factors):
+#' dnum(iris2$Species)
+#'
 dnum <- function(data1, neat = TRUE, sizesort = FALSE) {
-  data  <- deparse(substitute(data1))
-  data2 <- describe(data1)
+  data  = deparse(substitute(data1))
+  data2 = sapply(data1, as.numeric)
+  data2 = describe(data2)
 
   if(grepl("\\$", data)){
     data = strsplit(data, "\\$")[[1]]
@@ -34,8 +40,12 @@ dnum <- function(data1, neat = TRUE, sizesort = FALSE) {
     data2 = cbind(data, var, data2)
   } else {
     data2 = cbind("var" = row.names(data2), data2)
-    data = strsplit(data, "\\[")[[1]][1]
-    data2 <- cbind(data, data2)
+    if(nrow(data2) == 1){
+      data2['var'] = unlist(strsplit(data, '\\"'))[2]
+    }
+    data = unlist(strsplit(data, "\\["))[1]
+
+    data2 = cbind(data, data2)
   }
 
   row.names(data2) = NULL
