@@ -169,6 +169,21 @@ $Statistics
 ```{r}
 # Single variable
 dnum(iris2$Sepal.Length)
-# dnum(iris2["Sepal.Length"])
-# dnum(iris2[, "Sepal.Length"])
+dnum(iris2["Sepal.Length"])
+dnum(iris2[, "Sepal.Length"])
+```
+```
+   data          var   n     mean  sd median trimmed mad min max range skew kurtosis  se
+1 iris2 Sepal.Length 150 5.871333 0.9    5.8     5.8 1.1 4.3 7.7   3.4  0.3     -0.8 0.1
+```
+
+```{r}
+# Multiple variables
+dnum(iris2[, c("Sepal.Length", "Sepal.Width", "Sold")])
+```
+```
+   data          var   n      mean  sd median trimmed mad min max range skew kurtosis  se
+1 iris2 Sepal.Length 150 5.8713333 0.9    5.8     5.8 1.1 4.3 7.7   3.4  0.3     -0.8 0.1
+2 iris2  Sepal.Width 150 3.0780000 0.4    3.0     3.1 0.3 2.2 4.4   2.2  0.3      0.0 0.0
+3 iris2         Sold 150 0.4733333 0.5    0.0     0.5 0.0 0.0 1.0   1.0  0.1     -2.0 0.0
 ```
