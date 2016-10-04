@@ -162,3 +162,13 @@ $Statistics
 * Generate raw output: `dtable(iris2, neat = FALSE)`
 
 * Generate list outputs: `dtable(iris2, as.list = T)`
+
+
+### dnum  
+* Generate descriptive statistics with dynamic input
+```{r}
+# Single variable
+dnum(iris2$Sepal.Length)
+# dnum(iris2["Sepal.Length"])
+# dnum(iris2[, "Sepal.Length"])
+```
