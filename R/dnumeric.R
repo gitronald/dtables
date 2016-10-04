@@ -1,7 +1,7 @@
 #' Create standard descriptive statistics
 #'
 #' Wrapper for \code{psych::describe} that adds the name of the dataset and the
-#' variable being examined to its output. Use in \code{dtable} for multiple
+#' variable being examined to its output. Used in \code{dtable} for multiple
 #' variables.
 #'
 #' @param data a \code{data.frame}
