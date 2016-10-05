@@ -1,6 +1,6 @@
 # dtables
 
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/dtables)](https://cran.r-project.org/package=dtables)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dtables)](https://cran.r-project.org/package=dtables)
 [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/dtables)](https://cranlogs.r-pkg.org/badges/grand-total/dtables)
 [![Build Status](https://travis-ci.org/gitronald/dtables.svg?branch=master)](https://travis-ci.org/gitronald/dtables)
 
