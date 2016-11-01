@@ -10,13 +10,13 @@
 |language |(EN)                         |
 |collate  |English_United States.1252   |
 |tz       |America/New_York             |
-|date     |2016-10-06                   |
+|date     |2016-11-01                   |
 
 ## Packages
 
 |package |*  |version |date       |source                       |
 |:-------|:--|:-------|:----------|:----------------------------|
-|dtables |   |0.2.0   |2016-10-06 |local (gitronald/dtables@NA) |
+|dtables |*  |0.2.0   |2016-11-01 |local (gitronald/dtables@NA) |
 |psych   |   |1.6.9   |2016-09-17 |CRAN (R 3.3.1)               |
 
 # Check results

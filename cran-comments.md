@@ -6,4 +6,4 @@
 There were no ERRORs, WARNINGs, or NOTEs. 
 
 ## Downstream dependencies
-There is one downstream dependency for `dtables`. A `devtools::revdep_check` returns one error saying failed to install the package `IPtoCountry`, but using `install.packages('IPtoCountry')` does not return any problems and the `dtables::dft` function used in `IPtoCountry` has not changed in a way that affects its operation.
+There is one downstream dependency for `dtables`. A `devtools::revdep_check` returns one error saying failed to install the package `IPtoCountry`, but using `install.packages('IPtoCountry')` does not return any problems and the `dtables::dft` function used in `IPtoCountry` has not changed in a way that affects its operation in that package.
