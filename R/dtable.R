@@ -68,7 +68,14 @@ dtable <- function (data1,
                               sizesort = sizesort)
 
   if(!as.list){
+    # Column names correction for rbind
+    dtable$Frequencies = lapply(dtable$Frequencies,
+                                function(x) {
+                                  names(x)[3] = 'group'
+                                  return(x)
+                                })
     dtable$Frequencies <- do.call(rbind, dtable$Frequencies)
+
     dtable$Statistics <- do.call(rbind, dtable$Statistics)
   }
 
