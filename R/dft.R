@@ -23,7 +23,13 @@ dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE, digits 
   dft  <- data.frame(t)
 
   var1 = deparse(substitute(data1))
-  var1 = strsplit(var1, "\\$")[[1]][2]
+
+  if(grepl("\\$", var1)) { # Extract variable name
+    var1 = strsplit(var1, "\\$")[[1]][2]
+  } else if (grepl('"(.*?)"', var1)){
+    var1 = unlist(strsplit(var1, '"'))
+    var1 = var1[(grep('\\[', var1) + 1): (grep('\\]', var1) - 1)]
+  }
 
   if(ncol(dft) == 2) {
     names(dft) <- c(var1, "n")
