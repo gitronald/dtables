@@ -34,6 +34,9 @@ dfactor <- function (data1, vars, neat = TRUE, sizesort = TRUE) {
     dft <- dft[order(dft[, "n"], decreasing = TRUE), ]
   }
 
+  if(length(vars) == 1) {
+    names(dft)[1] = vars
+  }
   dft <- cbind(dataset, demographic, dft)
   rownames(dft) <- NULL
 

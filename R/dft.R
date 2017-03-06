@@ -24,7 +24,8 @@ dft <- function(data1, prop = TRUE, perc = TRUE, by = NULL, neat = TRUE, digits 
 
   var1 = deparse(substitute(data1))
 
-  if(grepl("\\$", var1)) { # Extract variable name
+  # Extract variable name depending on format (e.g. data$var or data[, 'var'])
+  if(grepl("\\$", var1)) {
     var1 = strsplit(var1, "\\$")[[1]][2]
   } else if (grepl('"(.*?)"', var1)){
     var1 = unlist(strsplit(var1, '"'))
